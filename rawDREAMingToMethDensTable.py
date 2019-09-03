@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import re
 import datetime
-import ntpath
+import os.path
 
 import argparse
 from argparse import RawTextHelpFormatter
@@ -169,8 +169,8 @@ parser.add_argument('-out', '--outDir', action='store',
 
 # get file name from path no matter the operating system or file path
 def path_leaf(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
+    head, tail = os.path.split(path)
+    return tail or os.path.basename(head)
 
 #-----------------------------------------------------------------------------------------
 

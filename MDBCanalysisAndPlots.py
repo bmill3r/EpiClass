@@ -8,7 +8,7 @@ import argparse
 from argparse import RawTextHelpFormatter
 
 import datetime
-import ntpath
+import os.path
 
 from sklearn.metrics import roc_curve, auc
 import scipy.stats as stats
@@ -280,8 +280,8 @@ mpl.rc('font', **font)
 
 # get file name from path no matter the operating system or file path
 def path_leaf(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
+    head, tail = os.path.split(path)
+    return tail or os.path.basename(head)
 
 
 #--------------------------------------------------------------------------
