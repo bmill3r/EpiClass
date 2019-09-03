@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import re
 import datetime
-import ntpath
+import os.path
 
 import argparse
 from argparse import RawTextHelpFormatter
@@ -169,8 +169,8 @@ parser.add_argument('-out', '--outDir', action='store',
 
 # get file name from path no matter the operating system or file path
 def path_leaf(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
+    head, tail = os.path.split(path)
+    return tail or os.path.basename(head)
 
 #-----------------------------------------------------------------------------------------
 
@@ -237,7 +237,7 @@ else:
 	fileTag = 'convertRawDREAMingToMethDensTable.' + inputName + '.poisAdj=' + str(poisAdj).upper() + '.input2bg=' + str(input2bg).upper() + '.Created=' + str(date)
 
 
-# print std.out 'print' statements to new file and to console:
+# print(std.out 'print' statements to new file and to console:)
 class Logger(object):
     def __init__(self):
         self.terminal = sys.stdout
@@ -255,24 +255,24 @@ class Logger(object):
 sys.stdout = Logger()
 
 
-print 'Date:' + str(date)
-print '#--------------------------------------------------------------------------'
-print 'Command:'
-print sys.argv
-print ' '
-print args
-print ' '
-print '#--------------------------------------------------------------------------'
-print "Building 'methylationDensityTable.csv' files from raw DREAMing data"
-print 'Methylation Density Table: ' + str(inputName)
-print 'Parameters:'
-print '	number of CpGs = ' + str(numCpGs)
-print '	input2bg = ' + str(input2bg)
-print '	Poisson Adjustment = ' + str(poisAdj)
-print '	Wells per DREAMing assay = ' + str(numWells)
-print '	Included information:'
-print '	' + str(info)
-print ' '
+print('Date:' + str(date))
+print('#--------------------------------------------------------------------------')
+print('Command:')
+print(sys.argv)
+print(' ')
+print(args)
+print(' ')
+print('#--------------------------------------------------------------------------')
+print("Building 'methylationDensityTable.csv' files from raw DREAMing data")
+print('Methylation Density Table: ' + str(inputName))
+print('Parameters:')
+print('	number of CpGs = ' + str(numCpGs))
+print('	input2bg = ' + str(input2bg))
+print('	Poisson Adjustment = ' + str(poisAdj))
+print('	Wells per DREAMing assay = ' + str(numWells))
+print('	Included information:')
+print('	' + str(info))
+print(' ')
 
 
 # list of unique sample names (split on _H or _L headings to designate type of melt peak in raw DREAMing table)
@@ -282,10 +282,10 @@ samplesOfInterest = sorted(list(set([ re.split(r'_[HL]', i)[0] for i in df.colum
 minMelt = np.nanmin(df.loc[ wellIndices ].astype(float).values.ravel())
 maxMelt = np.nanmax(df.loc[ wellIndices ].astype(float).values.ravel())
 
-print '	Minumum recorded melting peak = ' + str(minMelt)
-print '	Maximum recorded melting peak = ' + str(maxMelt)
-print '	Melting degree C resolution = ' + str(meltRes)
-print ' '
+print('	Minumum recorded melting peak = ' + str(minMelt))
+print('	Maximum recorded melting peak = ' + str(maxMelt))
+print('	Melting degree C resolution = ' + str(meltRes))
+print(' ')
 
 # range of recorded melting peak temperatures in raw DREAMing data to use as temporary column headings to store melting peak temperature counts for samples.
 melt_cols = [str(round(t, 1)) if str(round(t, 1))[-1] != '0' else str(round(t, 1))[:2] for t in np.arange(minMelt, maxMelt+meltRes, meltRes)]
@@ -343,11 +343,11 @@ recordIndex = dict(zip(columns, np.arange(len(columns))))
 
 master_array = []
 
-print 'Extracting raw melt peak counts from samples of interest...'
+print('Extracting raw melt peak counts from samples of interest...')
 
 for sample in samplesOfInterest:
 
-	print '	' + str(sample)
+	print('	' + str(sample))
 
 	# make list to update for each sample
 	sampleRecord = [0] * len(columns) 
@@ -407,10 +407,10 @@ fileName = 'plasmaMeltPeakCounts.' + inputName + '.poisAdj=' + str(poisAdj).uppe
 
 if meltPeakTable == True:
 	master_df.to_csv(fileName)
-	print ' '
-	print "'plasmaMeltPeakCounts.csv' file created:"
-	print fileName
-	print ' '
+	print(' ')
+	print("'plasmaMeltPeakCounts.csv' file created:")
+	print(fileName)
+	print(' ')
 
 
 #-----------------------------------------------------------------------------------------
@@ -418,8 +418,8 @@ if meltPeakTable == True:
 # Continue to make Methylation Density Table
 # convert 'plasmaMeltPeakCounts.csv' to 'methylation_density_table.csv' for use with MDBCanalysisAndPlots.py
 
-print "Converting to 'methylation_density_table.csv'..."
-print ' '
+print("Converting to 'methylation_density_table.csv'...")
+print(' ')
 
 
 # set sample names as index
@@ -460,13 +460,13 @@ methDensTableCombined['MD'] = MDs
 
 methDensTableCombined.reset_index(inplace=True, drop=True)
 
-print 'number of unmethylated CpGs:'
-print numU
-print 'number of methylated CpGs:'
-print numM
-print 'MDs:'
-print MDs
-print ' '
+print('number of unmethylated CpGs:')
+print(numU)
+print('number of methylated CpGs:')
+print(numM)
+print('MDs:')
+print(MDs)
+print(' ')
 
 # reorder columns:
 methDensTableCombined = methDensTableCombined[ ['numU', 'numM', 'MD'] + samplesOfInterest ]
@@ -486,8 +486,8 @@ numU  numM    MD  100250   100292  100296  100442  100626  100654  \
 #methDensFileName = 'methylation_density_table.' + inputName + '.poisAdj=' + str(poisAdj).upper() + '.input2bg=' + str(input2bg).upper() + '.Created=' + str(date) + '.csv'
 methDensTableCombined.to_csv(fileTag + '.csv', index=False)
 
-print 'Created: ' + fileTag + '.csv'
-print 'Done'
+print('Created: ' + fileTag + '.csv')
+print('Done')
 
 
 

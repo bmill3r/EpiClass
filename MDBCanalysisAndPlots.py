@@ -8,7 +8,7 @@ import argparse
 from argparse import RawTextHelpFormatter
 
 import datetime
-import ntpath
+import os.path
 
 from sklearn.metrics import roc_curve, auc
 import scipy.stats as stats
@@ -280,8 +280,8 @@ mpl.rc('font', **font)
 
 # get file name from path no matter the operating system or file path
 def path_leaf(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
+    head, tail = os.path.split(path)
+    return tail or os.path.basename(head)
 
 
 #--------------------------------------------------------------------------
@@ -301,9 +301,9 @@ date = datetime.date.today()
 # methylationDensityTable.csv
 df = pd.read_csv(args.methylation)
 if df.empty == True:
-	print 'The loaded methylationDensityTable.csv is empty.'
-	print 'check the -M input file.'
-	print "Exiting script."
+	print('The loaded methylationDensityTable.csv is empty.')
+	print('check the -M input file.')
+	print("Exiting script.")
 	sys.exit(0)
 
 # Name of methylationDensityTable.csv
@@ -316,8 +316,8 @@ locus = str(inputName).split('.', 1)[1].split('.Created')[0]
 
 # cases sample set name
 if (vars(args)['cases'] == None):
-	print 'Need to indicate a name for the cases sample set with -T cases.'
-	print "Exiting script."
+	print('Need to indicate a name for the cases sample set with -T cases.')
+	print("Exiting script.")
 	sys.exit(0)
 else:
 	casesType = str(args.cases)
@@ -325,8 +325,8 @@ else:
 
 # controls sample set name
 if (vars(args)['controls'] == None):
-	print 'Need to indicate a name for the controls sample set with -T controls.'
-	print "Exiting script."
+	print('Need to indicate a name for the controls sample set with -T controls.')
+	print("Exiting script.")
 	sys.exit(0)
 else:
 	controlsType = str(args.controls)
@@ -338,7 +338,7 @@ else:
 
 # No sampleTable.csv and no caseID or ctrID given, then cannot select samples and exit script
 if (vars(args)['samples'] == None) and ((vars(args)['ctrID'] == None) or (vars(args)['caseID'] == None)):
-	print '''Need to select case and control groups either using 'sampleTable.csv' or caseID/ctrID'''
+	print('''Need to select case and control groups either using 'sampleTable.csv' or caseID/ctrID''')
 	sys.exit(0)
 
 
@@ -363,9 +363,9 @@ if vars(args)['samples'] != None:
 		cases = df.loc[:, [col for col in df.columns if str(ID) in col] ].columns.values
 
 	else:
-		print str(casesType) + " not found in: " + str(args.samples)
-		print "and caseID not given. Cannot select cases."
-		print "Exiting script."
+		print(str(casesType) + " not found in: " + str(args.samples))
+		print("and caseID not given. Cannot select cases.")
+		print("Exiting script.")
 		sys.exit(0)
 
 
@@ -384,9 +384,9 @@ if vars(args)['samples'] != None:
 		controls = df.loc[:, [col for col in df.columns if str(ID) in col] ].columns.values
 
 	else:
-		print str(controlsType) + " not found in: " + str(args.samples)
-		print "And ctrID also not given. Cannot select cases."
-		print "Exiting script"
+		print(str(controlsType) + " not found in: " + str(args.samples))
+		print("And ctrID also not given. Cannot select cases.")
+		print("Exiting script")
 		sys.exit(0)
 
 
@@ -425,7 +425,7 @@ else:
 	fileTag = 'MDBCAnalysis.' + 'Created=' + str(date) + '.' + casesType + '_vs_' + controlsType + '.' + locus  + '.inputFracAdjust=' + str(inputFracAdjust) + '.usePeakCounts=' + str(usePeakCounts)
 
 
-# print std.out 'print' statements to new file and to console:
+# print(std.out 'print' statements to new file and to console:)
 class Logger(object):
     def __init__(self):
         self.terminal = sys.stdout
@@ -446,23 +446,23 @@ sys.stdout = Logger()
 #--------------------------------------------------------------------------
 #--------------------------------------------------------------------------
 
-print 'Date:' + str(date)
-print '#--------------------------------------------------------------------------'
-print 'Command:'
-print sys.argv
-print ' '
-print args
-print ' '
-print '#--------------------------------------------------------------------------'
-print 'MDBC ANALYSIS BEGIN'
-print 'Methylation Density Table: ' + str(inputName)
-print 'inputFracAdjust = ' + str(inputFracAdjust)
+print('Date:' + str(date))
+print('#--------------------------------------------------------------------------')
+print('Command:')
+print(sys.argv)
+print(' ')
+print(args)
+print(' ')
+print('#--------------------------------------------------------------------------')
+print('MDBC ANALYSIS BEGIN')
+print('Methylation Density Table: ' + str(inputName))
+print('inputFracAdjust = ' + str(inputFracAdjust))
 if inputFracAdjust == True:
-	print 'inputFracAdjust file: ' + vars(args)['fractions']
-print 'usePeakCounts = ' + str(usePeakCounts)
-print 'Cases = ' + casesType
-print 'Controls = ' + controlsType
-print ' '
+	print('inputFracAdjust file: ' + vars(args)['fractions'])
+print('usePeakCounts = ' + str(usePeakCounts))
+print('Cases = ' + casesType)
+print('Controls = ' + controlsType)
+print(' ')
 
 
 # lists to store AUC, optimal EF, and associated sensitivity and specificity for each MD
@@ -494,10 +494,10 @@ TotalReadCounts = df[ list(cases) + list(controls) ].copy().sum()
 # remove any samples that have no reads at all:
 noValueSamples = list(TotalReadCounts[TotalReadCounts == 0].index)
 
-print 'Samples with no reads: '
-print noValueSamples
-print 'Removed'
-print ' '
+print('Samples with no reads: ')
+print(noValueSamples)
+print('Removed')
+print(' ')
 
 methReadCounts_filt = methReadCounts[ ~methReadCounts.index.isin(noValueSamples) ].copy()
 TotalReadCounts_filt = TotalReadCounts[ ~TotalReadCounts.index.isin(noValueSamples) ].copy()
@@ -566,11 +566,11 @@ ef_cutoffs = np.array(list(np.linspace(0.000, max_ef, 100, endpoint=False)) + [m
 
 if (vars(args)['totalReads'] == True):
 
-	print 'Generating total read EFs per sample set...'
+	print('Generating total read EFs per sample set...')
 
 
 	if inputFracAdjust == True:
-		print 'Adjusted by relative sample input fractions'
+		print('Adjusted by relative sample input fractions')
 		a = list(TotalReadCounts_filt[TotalReadCounts_filt.index.isin(cases)].copy().values / casesFracs)
 		b = list(TotalReadCounts_filt[TotalReadCounts_filt.index.isin(controls)].copy().values / ctrlFracs)
 	else:
@@ -599,18 +599,18 @@ if (vars(args)['totalReads'] == True):
 		y = b, c='b', marker='.', edgecolors='', s = 50)
 
 	s, p = stats.ranksums(a, b)
-	print 'Boxplots Case vs Control Total Read EFs:'
-	print '	# of cases = ' + str(len(a))
-	print '	# of controls = ' + str(len(b))
-	print '	Case median total read EF = ' + str(np.median(a))
-	print '	Control median total read EF = ' + str(np.median(b))
-	print '	Case lowest total read EF = ' + str(np.min(a))
-	print '	Control lowest total read EF = ' + str(np.min(b))
-	print '	Case highest total read EF = ' + str(np.max(a))
-	print '	Control highest total dread EF = ' + str(np.max(b))
-	print '	ranksum p-val = ' + str(p)
+	print('Boxplots Case vs Control Total Read EFs:')
+	print('	# of cases = ' + str(len(a)))
+	print('	# of controls = ' + str(len(b)))
+	print('	Case median total read EF = ' + str(np.median(a)))
+	print('	Control median total read EF = ' + str(np.median(b)))
+	print('	Case lowest total read EF = ' + str(np.min(a)))
+	print('	Control lowest total read EF = ' + str(np.min(b)))
+	print('	Case highest total read EF = ' + str(np.max(a)))
+	print('	Control highest total dread EF = ' + str(np.max(b)))
+	print('	ranksum p-val = ' + str(p))
 
-	# Identify optimal thresholds, plot, and print sens/spec:
+	# Identify optimal thresholds, plot, and print(sens/spec:)
 	case_labels = [1 for i in a]
 	ctrl_labels = [0 for i in b]
 	roc_values = a + b
@@ -619,13 +619,13 @@ if (vars(args)['totalReads'] == True):
 	roc_auc = auc(fpr, tpr)
 	optimal_idx = np.argmax( tpr - fpr )
 	optimal_threshold = thresholds[optimal_idx]
-	#print '	optimal total read threshold = ' + str(optimal_threshold)
-	print '	Classification by total read EF:'
-	print '	AUC = ' + str(round(roc_auc, 2))
-	print '	TPR = ' + str(round(tpr[optimal_idx], 2))
-	print '	1-FPR = ' + str(round(1.0-fpr[optimal_idx], 2))
-	print '	optimal total read threshold = ' + str(optimal_threshold)
-	print ' '
+	#print('	optimal total read threshold = ' + str(optimal_threshold))
+	print('	Classification by total read EF:')
+	print('	AUC = ' + str(round(roc_auc, 2)))
+	print('	TPR = ' + str(round(tpr[optimal_idx], 2)))
+	print('	1-FPR = ' + str(round(1.0-fpr[optimal_idx], 2)))
+	print('	optimal total read threshold = ' + str(optimal_threshold))
+	print(' ')
 
 
 	#ax.axhline(y=optimal_threshold, linestyle='--', color='k')
@@ -659,9 +659,9 @@ if (vars(args)['totalReads'] == True):
 
 if (vars(args)['readEFperMD'] == True):
 
-	print 'Calculating sample read EFs for each MD ...'
+	print('Calculating sample read EFs for each MD ...')
 	if inputFracAdjust == True:
-		print 'Adjusted by relative sample input fractions'
+		print('Adjusted by relative sample input fractions')
 
 	sorted_MDs = sorted(list(set(df['MD'].values)))
 
@@ -716,19 +716,19 @@ if (vars(args)['readEFperMD'] == True):
 			y = b, c='b', marker='.', edgecolors='', s = 50)
 
 		s, p = stats.ranksums(a, b)
-		print ' '
-		print '	Only reads with MD = ' + str(md)
-		print '		# of cases = ' + str(len(a))
-		print '		# of controls = ' + str(len(b))
-		print '		Case median EF = ' + str(np.median(a))
-		print '		Control median EF = ' + str(np.median(b))
-		print '		Case lowest EF = ' + str(np.min(a))
-		print '		Control lowest EF = ' + str(np.min(b))
-		print '		Case highest EF = ' + str(np.max(a))
-		print '		Control highest EF = ' + str(np.max(b))
-		print '		ranksum p-val = ' + str(p)
+		print(' ')
+		print('	Only reads with MD = ' + str(md))
+		print('		# of cases = ' + str(len(a)))
+		print('		# of controls = ' + str(len(b)))
+		print('		Case median EF = ' + str(np.median(a)))
+		print('		Control median EF = ' + str(np.median(b)))
+		print('		Case lowest EF = ' + str(np.min(a)))
+		print('		Control lowest EF = ' + str(np.min(b)))
+		print('		Case highest EF = ' + str(np.max(a)))
+		print('		Control highest EF = ' + str(np.max(b)))
+		print('		ranksum p-val = ' + str(p))
 
-		# Identify optimal thresholds, plot, and print sens/spec:
+		# Identify optimal thresholds, plot, and print(sens/spec:)
 		case_labels = [1 for i in a]
 		ctrl_labels = [0 for i in b]
 		roc_values = a + b
@@ -737,7 +737,7 @@ if (vars(args)['readEFperMD'] == True):
 		roc_auc = auc(fpr, tpr)
 		optimal_idx = np.argmax( tpr - fpr )
 		optimal_threshold = thresholds[optimal_idx]
-		print '		optimal EF threshold = ' + str(optimal_threshold)
+		print('		optimal EF threshold = ' + str(optimal_threshold))
 
 		#ax.axhline(y=optimal_threshold, linestyle='--', color='k')
 
@@ -788,17 +788,17 @@ if (vars(args)['readEFperMD'] == True):
 
 		x += 1
 
-	print ' '
-	print 'Generating sample set read fraction per MD Boxplot image...'
-	print str(len(sorted_MDs)) + ' MD boxplots to plot...'
+	print(' ')
+	print('Generating sample set read fraction per MD Boxplot image...')
+	print(str(len(sorted_MDs)) + ' MD boxplots to plot...')
 
 	plt.tight_layout()
 	fig.savefig(fileTag + '.ReadFracPerMD-BOXPLOT.png', bbox_inches='tight', pad_inches=1.0, dpi=400)
 	plt.close()
 
 
-	print 'Sample read EF per MD boxplot completed'
-	print ' '
+	print('Sample read EF per MD boxplot completed')
+	print(' ')
 
 
 #--------------------------------------------------------------------------
@@ -810,10 +810,10 @@ if (vars(args)['readEFperMD'] == True):
 
 if (vars(args)['readsPerMDPlot'] == True):
 
-	print 'Generating stacked bar plots of read counts per MD for each sample set...'
+	print('Generating stacked bar plots of read counts per MD for each sample set...')
 
 	if inputFracAdjust == True:
-		print 'Adjusted by relative sample input fraction'
+		print('Adjusted by relative sample input fraction')
 
 
 	# list of observed read methylation densities that exist in the methylation density table
@@ -825,7 +825,7 @@ if (vars(args)['readsPerMDPlot'] == True):
 	MD_cols['C'] = MD_cols[['numU', 'numM']].sum(axis=1)
 
 
-	print 'Making sample read MD per input table for cases...'
+	print('Making sample read MD per input table for cases...')
 	# construct table of read counts and their meC information for samples of interest
 	cases_cols = df[cases]
 	if inputFracAdjust == True:
@@ -867,7 +867,7 @@ if (vars(args)['readsPerMDPlot'] == True):
 	case_weighted_MDs = case_weighted_MDs[reorder_names]
 	#--------------------------------------------------------------------------
 
-	print 'Making weighted locus methylation density table for controls...'
+	print('Making weighted locus methylation density table for controls...')
 	ctrl_cols = df[controls]
 	if inputFracAdjust == True:
 		ctrl_cols = ctrl_cols.copy().div(ctrlFracs)
@@ -908,7 +908,7 @@ if (vars(args)['readsPerMDPlot'] == True):
 	#--------------------------------------------------------------------------
 	#--------------------------------------------------------------------------
 
-	print 'Plotting weighted locus methylation density for cases...'
+	print('Plotting weighted locus methylation density for cases...')
 	# Plotting
 	fig = plt.figure()
 	ax = fig.add_axes([0.1, 0.1, 0.9, 0.9])
@@ -958,12 +958,12 @@ if (vars(args)['readsPerMDPlot'] == True):
 	ax.get_legend().remove()
 
 	fig.savefig(fileTag + '.CASES_FRAC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
-	print 'Cases Barplot created.'
+	print('Cases Barplot created.')
 	plt.close()
 
 	#--------------------------------------------------------------------------
 
-	print 'Plotting weighted locus methylation density for controls...'
+	print('Plotting weighted locus methylation density for controls...')
 	# Plotting
 	fig = plt.figure()
 	ax = fig.add_axes([0.1, 0.1, 0.9, 0.9])
@@ -1014,9 +1014,9 @@ if (vars(args)['readsPerMDPlot'] == True):
 
 	fig.savefig(fileTag + '.CTRLS_FRAC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
 
-	print 'Control Barplot created.'
-	print 'Done'
-	print ' '
+	print('Control Barplot created.')
+	print('Done')
+	print(' ')
 	plt.close()
 
 
@@ -1029,10 +1029,10 @@ if (vars(args)['readsPerMDPlot'] == True):
 
 if (vars(args)['weightedReadFractionPlot'] == True):
 
-	print 'Generating stacked bar plot of weighted locus methylation density fractions for each sample set...'
+	print('Generating stacked bar plot of weighted locus methylation density fractions for each sample set...')
 
 	if inputFracAdjust == True:
-		print 'Adjusted by relative sample input fraction'
+		print('Adjusted by relative sample input fraction')
 
 
 	# list of observed read methylation densities that exist in the methylation density table
@@ -1043,7 +1043,7 @@ if (vars(args)['weightedReadFractionPlot'] == True):
 	MD_cols['C'] = MD_cols[['numU', 'numM']].sum(axis=1)
 
 
-	print 'Making weighted locus methylation density table for cases...'
+	print('Making weighted locus methylation density table for cases...')
 	# construct table of read counts and their meC information for samples of interest
 	cases_cols = df[cases]
 	if inputFracAdjust == True:
@@ -1086,7 +1086,7 @@ if (vars(args)['weightedReadFractionPlot'] == True):
 	reorder_names = [i[1] for i in reorder]
 	case_weighted_MDs = case_weighted_MDs[reorder_names]
 	#--------------------------------------------------------------------------
-	print 'Plotting weighted locus methylation density for cases...'
+	print('Plotting weighted locus methylation density for cases...')
 	# Plotting
 	fig = plt.figure()
 	ax = fig.add_axes([0.1, 0.1, 0.9, 0.9])
@@ -1136,11 +1136,11 @@ if (vars(args)['weightedReadFractionPlot'] == True):
 	ax.get_legend().remove()
 
 	fig.savefig(fileTag + '.CASES_WEIGHTED_FRAC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
-	print 'Cases Barplot created.'
+	print('Cases Barplot created.')
 
 
 
-	print 'Making weighted locus methylation density table for controls...'
+	print('Making weighted locus methylation density table for controls...')
 	ctrl_cols = df[controls]
 	if inputFracAdjust == True:
 		ctrl_cols = ctrl_cols.copy().div(ctrlFracs)
@@ -1181,7 +1181,7 @@ if (vars(args)['weightedReadFractionPlot'] == True):
 	reorder_names = [i[1] for i in reorder]
 	ctrl_weighted_MDs = ctrl_weighted_MDs[reorder_names]
 	#--------------------------------------------------------------------------
-	print 'Plotting weighted locus methylation density for controls...'
+	print('Plotting weighted locus methylation density for controls...')
 	# Plotting
 	fig = plt.figure()
 	ax = fig.add_axes([0.1, 0.1, 0.9, 0.9])
@@ -1232,9 +1232,9 @@ if (vars(args)['weightedReadFractionPlot'] == True):
 
 	fig.savefig(fileTag + '.CTRLS_WEIGHTED_FRAC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
 
-	print 'Control Barplot created.'
-	print 'Done'
-	print ' '
+	print('Control Barplot created.')
+	print('Done')
+	print(' ')
 
 
 #--------------------------------------------------------------------------
@@ -1246,10 +1246,10 @@ if (vars(args)['weightedReadFractionPlot'] == True):
 
 if (vars(args)['readEFhistogram'] == True):
 
-	print "Generating Histogram of sample set read fractions across MD..."
+	print("Generating Histogram of sample set read fractions across MD...")
 
 	if inputFracAdjust == True:
-		print 'Adjusted by relative sample input fraction'
+		print('Adjusted by relative sample input fraction')
 
 	# get lists of MD values with occurances equal to number of reads with the given MD for each sample set
 
@@ -1345,8 +1345,8 @@ if (vars(args)['readEFhistogram'] == True):
 
 	plt.close()
 
-	print "Histogram completed"
-	print ' '
+	print("Histogram completed")
+	print(' ')
 
 
 #--------------------------------------------------------------------------
@@ -1356,16 +1356,16 @@ if (vars(args)['readEFhistogram'] == True):
 #--------------------------------------------------------------------------
 #--------------------------------------------------------------------------
 
-print 'MDBC procedure:'
-print ' '
+print('MDBC procedure:')
+print(' ')
 
 fig = plt.figure() # for optional plotting within loop
 
 for md in md_cutoffs:
 	if md == 0.0:
-		print 'ROC curve analysis for MD cutoff > ' + str(round(md, 2))
+		print('ROC curve analysis for MD cutoff > ' + str(round(md, 2)))
 	else:
-		print 'ROC curve analysis for MD cutoff >= ' + str(round(md, 2))
+		print('ROC curve analysis for MD cutoff >= ' + str(round(md, 2)))
 
 	# for each MD cutoff, compute weighted EF values for each sample.
 	# weighted so that reads that cover only a few CpGs don't shift MD/EF significantly
@@ -1458,16 +1458,16 @@ for md in md_cutoffs:
 	sens_per_md.append(sensitivity)
 	spec_per_md.append(specificity)
 
-	print "	AUC = " + str(round(roc_auc, 2))
-	print "	optimal EF = " + str(optimal_threshold)
-	print "	TPR = " + str(round(sensitivity, 2))
-	print "	1-FPR = " + str(round(specificity, 2))
+	print("	AUC = " + str(round(roc_auc, 2)))
+	print("	optimal EF = " + str(optimal_threshold))
+	print("	TPR = " + str(round(sensitivity, 2)))
+	print("	1-FPR = " + str(round(specificity, 2)))
 
 
 	# OPTIONAL: Generate ROC Curve for each MD cutoff:
 	#--------------------------------------------------------------------------
 	if (vars(args)['MDBCplots'] == True):
-		print '	Generating ROC Curve...'
+		print('	Generating ROC Curve...')
 
 		lw = 2
 		ax = fig.add_subplot(1,1,1)
@@ -1489,21 +1489,21 @@ for md in md_cutoffs:
 		plt.legend(loc="lower right", fontsize=12, edgecolor='k')
 		plt.savefig(fileTag + '.MD_' + str(round(md,2)) + '_cutoff-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
 		plt.clf()
-		print '	ROC Curve completed'
-		print ' '
+		print('	ROC Curve completed')
+		print(' ')
 
 	a = case_weighted_ef_vals
 	b = ctrl_weighted_ef_vals
 
 	s, p = stats.ranksums(a, b)
-	print '	# of cases = ' + str(len(a))
-	print '	# of controls = ' + str(len(b))
-	print '	Case MD cutoff median EF = ' + str(np.median(a))
-	print '	Control MD cutoff median EF = ' + str(np.median(b))
-	print '	ranksum p-val = ' + str(p)
+	print('	# of cases = ' + str(len(a)))
+	print('	# of controls = ' + str(len(b)))
+	print('	Case MD cutoff median EF = ' + str(np.median(a)))
+	print('	Control MD cutoff median EF = ' + str(np.median(b)))
+	print('	ranksum p-val = ' + str(p))
 
 	if (vars(args)['samples'] == True):
-		print '	Generating Boxplot...'
+		print('	Generating Boxplot...')
 		ax = fig.add_subplot(1,1,1)
 		fig.set_size_inches(2, 4, forward=True)
 		bp = ax.boxplot([a, b], positions=[1,3], widths=1, patch_artist=True)
@@ -1572,8 +1572,8 @@ for md in md_cutoffs:
 		fig.savefig(fileTag + '.MD_' + str(round(md,2)) + '_cutoff-BOXPLOT.png', bbox_inches='tight', pad_inches=1.0, dpi=400)
 		plt.clf()
 
-		print '	Boxplot completed'
-	print ' '
+		print('	Boxplot completed')
+	print(' ')
 	#--------------------------------------------------------------------------
 
 	# Compute TPR and FPR for each EF and MD cutoff combination for TPR and FPR matrices
@@ -1610,8 +1610,8 @@ roc_summary['1-FPR'] = spec_per_md
 roc_summary.to_csv(fileTag + '.SUMMARY.csv')
 
 
-print "TPR and FPR matrices complete"
-print ' '
+print("TPR and FPR matrices complete")
+print(' ')
 
 
 #--------------------------------------------------------------------------
@@ -1620,7 +1620,7 @@ print ' '
 
 if (vars(args)['heatmaps'] == True):
 
-	print "Generating Heat maps..."
+	print("Generating Heat maps...")
 
 
 	tpr_matrix = np.flipud(np.array(tpr_matrix))
@@ -1691,8 +1691,8 @@ if (vars(args)['heatmaps'] == True):
 	plt.close()
 
 
-	print "Heat maps completed"
-	print ' '
+	print("Heat maps completed")
+	print(' ')
 
 
 #--------------------------------------------------------------------------
@@ -1716,9 +1716,9 @@ max_idx = roc_summary.iloc[np.argwhere(diff_vals == max_diff).flatten()]['AUC'].
 opt_md = roc_summary.iloc[max_idx]['MD']
 opt_ef = roc_summary.iloc[max_idx]['optimal_ef_cutoff']
 
-print ' '
-print 'Overall Optimal MD = ' + str(round(opt_md,2))
-print 'Overall Optimal EF = ' + str(opt_ef)
+print(' ')
+print('Overall Optimal MD = ' + str(round(opt_md,2)))
+print('Overall Optimal EF = ' + str(opt_ef))
 
 
 #--------------------------------------------------------------------------
@@ -1881,14 +1881,14 @@ fig, ax = plt.subplots()
 lw = 2
 
 # MDBC Optimal MD Cutoff ROC curve
-print ' '
-print 'Optimal MD cutoff ROC Curve:'
-print '	MDBC (optimal MD cutoff = ' + str(round(opt_md,2)) + '):'
+print(' ')
+print('Optimal MD cutoff ROC Curve:')
+print('	MDBC (optimal MD cutoff = ' + str(round(opt_md,2)) + '):')
 optimal_idx = np.argmax( tpr_md - fpr_md )
-print '	AUC = ' + str(round(roc_auc_md, 2))
-print '	optimal EF cutoff = ' + str(thresholds_md[optimal_idx])
-print '	sensitivity = ' + str(tpr_md[optimal_idx])
-print '	specificity = ' + str(1.0 - fpr_md[optimal_idx])
+print('	AUC = ' + str(round(roc_auc_md, 2)))
+print('	optimal EF cutoff = ' + str(thresholds_md[optimal_idx]))
+print('	sensitivity = ' + str(tpr_md[optimal_idx]))
+print('	specificity = ' + str(1.0 - fpr_md[optimal_idx]))
 
 plt.plot(fpr_md, tpr_md, color='red',
          lw=lw, label='MDBC (MD = ' + str(round(opt_md*100,2)) + '%' + '); AUC = %0.2f' % roc_auc_md)
@@ -1896,15 +1896,15 @@ plt.plot(fpr_md, tpr_md, color='red',
 
 if (vars(args)['averageMethylation'] == True):
 	# Average Methylation ROC curve
-	print ' '
-	print 'Versus Average Methylation ROC Curve:'
+	print(' ')
+	print('Versus Average Methylation ROC Curve:')
 	if inputFracAdjust == True:
-		print 'Adjusted by relative sample input fraction'
+		print('Adjusted by relative sample input fraction')
 	optimal_idx = np.argmax( tpr_ave - fpr_ave )
-	print '	AUC = ' + str(round(roc_auc_ave, 2))
-	print '	optimal EF cutoff = ' + str(thresholds_ave[optimal_idx])
-	print '	sensitivity = ' + str(tpr_ave[optimal_idx])
-	print '	specificity = ' + str(1.0 - fpr_ave[optimal_idx])
+	print('	AUC = ' + str(round(roc_auc_ave, 2)))
+	print('	optimal EF cutoff = ' + str(thresholds_ave[optimal_idx]))
+	print('	sensitivity = ' + str(tpr_ave[optimal_idx]))
+	print('	specificity = ' + str(1.0 - fpr_ave[optimal_idx]))
 
 	plt.plot(fpr_ave, tpr_ave, color='blue',
 	         lw=lw, label='average methylation; AUC = %0.2f' % roc_auc_ave)
@@ -1962,15 +1962,15 @@ scatter = ax.scatter(x = np.random.normal(3, 0.1, size=len(b)),
 	y = b, c='b', marker='.', edgecolors='', s = 50)
 
 s, p = stats.ranksums(a, b)
-print ' '
-print 'Boxplots Case vs Control using optimal MD cutoff:'
-print '	# of cases = ' + str(len(a))
-print '	# of controls = ' + str(len(b))
-print '	Case median EF = ' + str(np.median(a))
-print '	Control median EF = ' + str(np.median(b))
-print '	ranksum p-val = ' + str(p)
+print(' ')
+print('Boxplots Case vs Control using optimal MD cutoff:')
+print('	# of cases = ' + str(len(a)))
+print('	# of controls = ' + str(len(b)))
+print('	Case median EF = ' + str(np.median(a)))
+print('	Control median EF = ' + str(np.median(b)))
+print('	ranksum p-val = ' + str(p))
 
-# Identify optimal thresholds, plot, and print sens/spec:
+# Identify optimal thresholds, plot, and print(sens/spec:)
 case_labels = [1 for i in a]
 ctrl_labels = [0 for i in b]
 roc_values = a + b
@@ -1979,7 +1979,7 @@ fpr, tpr, thresholds = roc_curve(roc_labels, roc_values)
 roc_auc = auc(fpr, tpr)
 optimal_idx = np.argmax( tpr - fpr )
 optimal_threshold = thresholds[optimal_idx]
-print '	optimal EF threshold = ' + str(optimal_threshold)
+print('	optimal EF threshold = ' + str(optimal_threshold))
 
 
 ax.axhline(y=optimal_threshold, linestyle='--', color='k')
@@ -2038,15 +2038,15 @@ if (vars(args)['averageMethylation'] == True):
 		y = b, c='b', marker='.', edgecolors='', s = 50)
 
 	s, p = stats.ranksums(a, b)
-	print ' '
-	print 'Boxplots Case vs Control using optimal Average Methylation:'
-	print '	# of cases = ' + str(len(a))
-	print '	# of controls = ' + str(len(b))
-	print '	Case median AveMeth = ' + str(np.median(a))
-	print '	Control median AveMeth = ' + str(np.median(b))
-	print '	ranksum p-val = ' + str(p)
+	print(' ')
+	print('Boxplots Case vs Control using optimal Average Methylation:')
+	print('	# of cases = ' + str(len(a)))
+	print('	# of controls = ' + str(len(b)))
+	print('	Case median AveMeth = ' + str(np.median(a)))
+	print('	Control median AveMeth = ' + str(np.median(b)))
+	print('	ranksum p-val = ' + str(p))
 
-	# Identify optimal thresholds, plot, and print sens/spec:
+	# Identify optimal thresholds, plot, and print(sens/spec:)
 	case_labels = [1 for i in a]
 	ctrl_labels = [0 for i in b]
 	roc_values = a + b
@@ -2055,7 +2055,7 @@ if (vars(args)['averageMethylation'] == True):
 	roc_auc = auc(fpr, tpr)
 	optimal_idx = np.argmax( tpr - fpr )
 	optimal_threshold = thresholds[optimal_idx]
-	print '	optimal AveMeth threshold = ' + str(optimal_threshold)
+	print('	optimal AveMeth threshold = ' + str(optimal_threshold))
 
 
 	ax.axhline(y=optimal_threshold, linestyle='--', color='k')
@@ -2083,9 +2083,9 @@ if (vars(args)['averageMethylation'] == True):
 	plt.close()
 
 
-print ' '
-print 'MDBC ANALYSIS COMPLETED'
-print ' '
+print(' ')
+print('MDBC ANALYSIS COMPLETED')
+print(' ')
 #--------------------------------------------------------------------------
 #--------------------------------------------------------------------------
 

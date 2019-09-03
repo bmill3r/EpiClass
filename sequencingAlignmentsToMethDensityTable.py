@@ -10,7 +10,7 @@ from distutils.spawn import find_executable
 import re
 from collections import Counter
 import datetime
-import ntpath
+import os.path
 import argparse
 from argparse import RawTextHelpFormatter
 
@@ -113,8 +113,8 @@ parser.add_argument('-out', '--outDir', action='store',
 
 
 def path_leaf(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
+    head, tail = os.path.split(path)
+    return tail or os.path.basename(head)
 
 # ----------------------------------------------------------------------------------------
 # Set up variables:
@@ -179,7 +179,7 @@ else:
                 str(args.readSlice) + '.Created=' + str(date)
 
 
-# print std.out 'print' statements to new file AND to the console:
+# print(std.out 'print' statements to new file AND to the console:)
 class Logger(object):
     def __init__(self):
         self.terminal = sys.stdout
@@ -200,19 +200,19 @@ sys.stdout = Logger()
 
 # ----------------------------------------------------------------------------------------
 
-print 'Date:' + str(date)
-print '#--------------------------------------------------------------------------'
-print 'Command:'
-print sys.argv
-print ' '
-print args
-print '#--------------------------------------------------------------------------'
-print 'Building Methylation Density Table for samples of fileType: ' + \
-    str(args.fileType) + '...'
-print 'Locating files in ' + path
-print 'Selecting reads from each file with ' + \
-    str(overlapTag) + ' overlap with interval(s):'
-print str(args.interval)
+print('Date:' + str(date))
+print('#--------------------------------------------------------------------------')
+print('Command:')
+print(sys.argv)
+print(' ')
+print(args)
+print('#--------------------------------------------------------------------------')
+print('Building Methylation Density Table for samples of fileType: ' + \
+    str(args.fileType) + '...')
+print('Locating files in ' + path)
+print('Selecting reads from each file with ' + \
+    str(overlapTag) + ' overlap with interval(s):')
+print(str(args.interval))
 
 # ----------------------------------------------------------------------------------------
 
@@ -244,8 +244,8 @@ for (dirpath, dirnames, filenames) in walk(path):
         if os.path.exists(inputFile) == False:
             continue
         else:
-            print ' '
-            print 'extracting reads from: ' + path_leaf(f)
+            print(' ')
+            print('extracting reads from: ' + path_leaf(f))
             lines = []  # collect reads from file
             # ----------------------------------------------------------------------------------------
             # check if samtools exists:
@@ -254,8 +254,8 @@ for (dirpath, dirnames, filenames) in walk(path):
                 # if samtools exists, use to read file and select reads overlapping intervals:
                 cmd = 'samtools view -L ' + \
                     str(intervalFileName) + ' ' + str(inputFile)
-                print ' accessing reads with `samtools view`.'
-                print ' ' + cmd
+                print(' accessing reads with `samtools view`.')
+                print(' ' + cmd)
 
                 # run code, check for errors, get output
                 reads = subprocess.Popen([cmd], shell=True,
@@ -264,9 +264,9 @@ for (dirpath, dirnames, filenames) in walk(path):
                 stdout, stderr = reads.communicate()
                 # if error, end script.
                 if len(stderr) != 0:
-                    print 'Error with `samtools view`.'
-                    print stderr
-                    print 'Exiting script.'
+                    print('Error with `samtools view`.')
+                    print(stderr)
+                    print('Exiting script.')
                     sys.exit(0)
                 # otherwise collect lines (reads) of interest:
                 else:
@@ -289,8 +289,8 @@ for (dirpath, dirnames, filenames) in walk(path):
 
             # if samtools does not exist, and sample is bam:
             elif bool(re.search(r'bam$', inputFile, re.IGNORECASE)):
-                print ' `samtools view` needed to access reads in BAM file.'
-                print ' skipping file...'
+                print(' `samtools view` needed to access reads in BAM file.')
+                print(' skipping file...')
                 continue
 
             # ----------------------------------------------------------------------------------------
@@ -335,7 +335,7 @@ for (dirpath, dirnames, filenames) in walk(path):
                 if vars(args)['overlap'] != None:
                     readsIn = readsIn[readsIn['overlap'] >= args.overlap]
 
-                print ' ' + str(len(readsIn)) + ' reads/read-pairs overlapping ' + intervalname
+                print(' ' + str(len(readsIn)) + ' reads/read-pairs overlapping ' + intervalname)
 
                 # choose whether to use methylation information that is only contained in the read overlap, or include the entire read
                 if vars(args)['readSlice'] == False:
@@ -416,19 +416,19 @@ for (dirpath, dirnames, filenames) in walk(path):
                         interval_reads.append([chrom, d['int_start'].iloc[0], d['int_stop'].iloc[0], methSeqStart, methSeqStop, len(stitchedMeth), numU, numM, md])
 
                 if len(interval_reads) == 0:
-                    print '	Warning: No reads found overlapping with ' + intervalname + ' in ' + str(inputFile)
+                    print('	Warning: No reads found overlapping with ' + intervalname + ' in ' + str(inputFile))
                     continue
                 else:
-                    print ' ' + str(len(interval_reads)) + ' unique sequences with CpGs'
+                    print(' ' + str(len(interval_reads)) + ' unique sequences with CpGs')
                     for i in interval_reads:
                         sample_reads.append(i)
 
             # check to see if any reads were selected:
             if len(sample_reads) == 0:
-                print '	Warning: No reads found overlapping any intervals in: ' + str(inputFile)
+                print('	Warning: No reads found overlapping any intervals in: ' + str(inputFile))
                 continue
             else:
-                print ' ' + str(len(sample_reads)) + ' total unique sequences with CpGs'
+                print(' ' + str(len(sample_reads)) + ' total unique sequences with CpGs')
                 # Build dataframe from sample_reads array for selected sample reads only
                 cols = ['chr', 'interval_start', 'interval_stop', 'methSeqStart', 'methSeqStop', 'methSeqLength', 'numU', 'numM', 'MD']
                 sample_reads_df = pd.DataFrame(sample_reads, columns=cols)
@@ -451,13 +451,13 @@ for (dirpath, dirnames, filenames) in walk(path):
                 merged_df = merged_df.join(unique_read_counts_df, how='outer')
 
 if merged_df.empty == True:
-    print 'No samples found in ' + str(args.inputDir) + '.'
-    print 'Check to make sure path is correct or samples have proper extensions.'
+    print('No samples found in ' + str(args.inputDir) + '.')
+    print('Check to make sure path is correct or samples have proper extensions.')
     sys.exit(0)
 else:
 
-    print ' '
-    print 'Cleaning table...'
+    print(' ')
+    print('Cleaning table...')
     # cleanup final dataframe
     sample_names = merged_df.columns.tolist()
     merged_df['chr'] = [i[0] for i in merged_df.index]
@@ -481,5 +481,5 @@ else:
     if os.path.exists(str(cwd) + '/' + 'interval.txt') == True:
         os.remove(str(cwd) + '/' + 'interval.txt')
 
-    print 'Finished'
-    print ' '
+    print('Finished')
+    print(' ')
