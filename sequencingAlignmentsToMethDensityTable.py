@@ -10,7 +10,7 @@ from distutils.spawn import find_executable
 import re
 from collections import Counter
 import datetime
-import ntpath
+import os.path
 import argparse
 from argparse import RawTextHelpFormatter
 
@@ -113,8 +113,8 @@ parser.add_argument('-out', '--outDir', action='store',
 
 
 def path_leaf(path):
-    head, tail = ntpath.split(path)
-    return tail or ntpath.basename(head)
+    head, tail = os.path.split(path)
+    return tail or os.path.basename(head)
 
 # ----------------------------------------------------------------------------------------
 # Set up variables:
