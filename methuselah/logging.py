@@ -63,20 +63,20 @@ date = str(datetime.date.today())
 
 # print(std.out 'print' statements to new file and to console:)
 class Logger(object):
-	def __init__(self):
-		self.terminal = sys.stdout
-		self.log = open('methuselah.' + date + '.log', "a+")
+    def __init__(self):
+        self.terminal = sys.stdout
+        self.log = open('methuselah.' + date + '.log', "a+")
 
-	def write(self, message):
-		self.terminal.write(message)
-		self.log.write(message)  
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)  
 
-	def flush(self):
-		#this flush method is needed for python 3 compatibility.
-		#this handles the flush command by doing nothing.
-		pass
+    def flush(self):
+        #this flush method is needed for python 3 compatibility.
+        #this handles the flush command by doing nothing.
+        pass
 
 # get file name from path no matter the operating system or file path
 def path_leaf(path):
-	head, tail = os.path.split(path)
-	return tail or os.path.basename(head)
+    head, tail = os.path.split(path)
+    return tail or os.path.basename(head)
