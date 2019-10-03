@@ -1,4 +1,8 @@
 .DS_Store
 test_data/
-methuselah.*.log
+dist/
+build/
+*.log
 *.pyc
+*.gz
+*.egg-info
