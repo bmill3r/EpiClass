@@ -36,7 +36,7 @@ H eterogeneity
 ################\\\<+<|\\\\\\\>+,++\#\\\\\\\|<<>++,,,,,,+=>|\\\########
 ##########\\<=+=|\<+<>\###\\\\\\\\\\\\\\\\\\\\|<>>>>>==+++++,++=<\#####
 
-Optimizing and predicting performance of DNA methylation biomarkers using methylation density information.
+Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.
 
 Copyright (C) 2019  Brendan F. Miller
 bmille79 <at> jh <dot> edu
@@ -65,7 +65,7 @@ setup(
     version="2.0.0-beta",
     author="Brendan F. Miller",
     author_email="bmille79@jh.edu",
-    description="Optimizing and predicting performance of DNA methylation biomarkers using methylation density information.",
+    description="Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bmill3r/methuselah",
@@ -76,12 +76,12 @@ setup(
     zip_safe=False,
 
     install_requires=[
-           'numpy=1.16.*',
-           'pandas=0.25.*',
-           'scikit-learn=0.21.*',
-           'scipy=1.3.*',
-           'matplotlib=3.1.*',
-           'pytables=3.5.*'],
+           'numpy==1.16.*',
+           'pandas==0.25.*',
+           'scikit-learn==0.21.*',
+           'scipy==1.3.*',
+           'matplotlib==3.1.*',
+           'tables==3.5.*'],
 
     entry_points={
         'console_scripts': [

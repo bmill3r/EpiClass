@@ -36,7 +36,7 @@ H eterogeneity
 ################\\\<+<|\\\\\\\>+,++\#\\\\\\\|<<>++,,,,,,+=>|\\\########
 ##########\\<=+=|\<+<>\###\\\\\\\\\\\\\\\\\\\\|<>>>>>==+++++,++=<\#####
 
-Optimizing and predicting performance of DNA methylation biomarkers using methylation density information.
+Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.
 
 Copyright (C) 2019  Brendan F. Miller
 bmille79 <at> jh <dot> edu
