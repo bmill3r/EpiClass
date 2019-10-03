@@ -58,34 +58,52 @@ this program.  If not, see <https://www.gnu.org/licenses/>.
 from setuptools import setup
 
 with open("README.md", "r") as fh:
-	long_description = fh.read()
+    long_description = fh.read()
 
 setup(
-	name="methuselah",
-	version="2.0.0-beta",
-	author="Brendan F. Miller",
-	author_email="bmille79@jh.edu",
-	description="Optimizing and predicting performance of DNA methylation biomarkers using methylation density information.",
-	long_description=long_description,
-	long_description_content_type="text/markdown",
-	url="https://github.com/bmill3r/methuselah",
-	packages=['methuselah'],
-	package_dir = {'methuselah': 'methuselah'},
-	include_package_data = True,
-    license = 'GPL-3.0',
-    zip_safe = False,
+    name="methuselah",
+    version="2.0.0-beta",
+    author="Brendan F. Miller",
+    author_email="bmille79@jh.edu",
+    description="Optimizing and predicting performance of DNA methylation biomarkers using methylation density information.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/bmill3r/methuselah",
+    packages=['methuselah'],
+    package_dir={'methuselah': 'methuselah'},
+    include_package_data=True,
+    license='GPL-3.0',
+    zip_safe=False,
 
-    entry_points = {
+    install_requires=[
+           'numpy',
+           'pandas',
+           'scikit-learn',
+           'scipy',
+           'matplotlib',
+           'tables'],
+
+    entry_points={
         'console_scripts': [
             'methuselah = methuselah.__main__:main'
         ]
     },
 
-    classifiers = [
-    	'Programming Language :: Python :: 3',
+    test_suite='nose.collector',
+    tests_require=[
+        'nose',
+        'pytest',
+        'pytest-cov',
+        'coverage'],
+
+    classifiers=[
+        'Programming Language :: Python :: 3 :: Only',
+        "Operating System :: OS Independent",
         'Development Status :: 4 - Beta',
+        'License :: Public Domain',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Bio-Informatics'
-        ]
+        'Topic :: Scientific/Engineering :: Medical Science Apps.',
+        'Environment :: Console'
+    ]
 )
-
