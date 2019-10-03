@@ -72,16 +72,16 @@ setup(
     packages=['methuselah'],
     package_dir={'methuselah': 'methuselah'},
     include_package_data=True,
-    license='GPL-3.0',
+    license='Public Domain',
     zip_safe=False,
 
     install_requires=[
-           'numpy',
-           'pandas',
-           'scikit-learn',
-           'scipy',
-           'matplotlib',
-           'tables'],
+           'numpy=1.16.*',
+           'pandas=0.25.*',
+           'scikit-learn=0.21.*',
+           'scipy=1.3.*',
+           'matplotlib=3.1.*',
+           'pytables=3.5.*'],
 
     entry_points={
         'console_scripts': [

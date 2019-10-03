@@ -66,7 +66,7 @@ from matplotlib import pyplot as plt
 
 # IMPORT MODULES
 from .arguments import get_arguments
-from .logging import Logger, path_leaf
+from .logging import Logger, path_leaf, Logging
 from .reading import dreamingToDensityTable, readsToDensityTable
 from .analyzing import mdbc
 from .plotting import boxplot, boxplot2sets, stackedBarplot, histogram, heatmap, rocplot
@@ -79,12 +79,13 @@ def main(args=None):
     date = str(datetime.date.today())
     cwd = os.getcwd()
 
-    sys.stdout = Logger()
+    #sys.stdout = Logger() # uncomment if you want output to be automatically stored in methuselah log file
 
     args, args_dict = get_arguments(args)
 
     if args_dict['cmd'] is None:
-        get_arguments(' ')
+        print('usage: methuselah [-h] [-V] [-v] {DREAMtoMD,READtoMD,MDBC} ...')
+        sys.exit(1)
 
     print('#--------------------------------------------------------------------------')
     print('#--------------------------------------------------------------------------')

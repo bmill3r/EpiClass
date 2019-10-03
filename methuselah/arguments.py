@@ -303,7 +303,7 @@ def get_arguments(args):
         epilog=dedent(epilog_description))
     # Optional arguments
     parser.add_argument(
-        '-v', '--version',
+        '-V', '--version',
         help='Print installed version to stout',
         action='version',
         version='%(prog)s ' + str(__version__))
@@ -347,6 +347,12 @@ def get_arguments(args):
         '-h', '--help',
         action='help',
         help='Show help message and exit')
+    dreamer_opts.add_argument(
+        '-v', '--verbose',
+        help='Set verbosity level. -v=WARNING, -vv=INFO, -vvv=DEBUG',
+        action='count',
+        default=0,
+        required=False)
     dreamer_opts.add_argument(
         '--input2bg',
         help='Include input genomic equivalents as background reads with a methylation density = 0.',
@@ -409,6 +415,12 @@ def get_arguments(args):
         '-h', '--help',
         action='help',
         help='Show help message and exit')
+    reader_opts.add_argument(
+        '-v', '--verbose',
+        help='Set verbosity level. -v=WARNING, -vv=INFO, -vvv=DEBUG',
+        action='count',
+        default=0,
+        required=False)
     reader_opts.add_argument(
         '--fileType',
         help='''Label indicating the type of files to select.
@@ -476,6 +488,12 @@ def get_arguments(args):
         '-h', '--help',
         action='help',
         help='Show help message and exit')
+    mdbcer_opts.add_argument(
+        '-v', '--verbose',
+        help='Set verbosity level. -v=WARNING, -vv=INFO, -vvv=DEBUG',
+        action='count',
+        default=0,
+        required=False)
     mdbcer_opts.add_argument(
         '--fractions',
         help='''Path to table with relative sample fractions.''',

@@ -58,6 +58,7 @@ this program.  If not, see <https://www.gnu.org/licenses/>.
 import sys
 import os
 import datetime
+import logging
 
 date = str(datetime.date.today())
 
@@ -75,6 +76,14 @@ class Logger(object):
         #this flush method is needed for python 3 compatibility.
         #this handles the flush command by doing nothing.
         pass
+
+class Logging(object):
+    def __init__(self, args):
+        
+        levels = [logging.WARNING, logging.INFO, logging.DEBUG]
+        level = levels[min(len(levels) - 1, args.verbose)]  # capped to number of levels
+        logging.basicConfig(level=level,
+                            format="%(levelname)s %(message)s")
 
 # get file name from path no matter the operating system or file path
 def path_leaf(path):

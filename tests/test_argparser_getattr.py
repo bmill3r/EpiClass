@@ -15,6 +15,8 @@ class ParserClass(object):
         print(self.args)
 
     def run(self):
+        # self.args is the arg Namespace from parser.
+        # for each arg, if it's boolean and True, then use getattr to run the method whose name matches the arg key (name of arg).
         return [getattr(self, key)() for key, val in vars(self.args).items() if isinstance(val, bool) and val]
 
 
