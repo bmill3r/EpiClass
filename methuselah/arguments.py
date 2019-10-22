@@ -38,20 +38,28 @@ H eterogeneity
 
 Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.
 
-Copyright (C) 2019  Brendan F. Miller
+2019  Brendan F. Miller
 bmille79 <at> jh <dot> edu
 
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with
-this program.  If not, see <https://www.gnu.org/licenses/>.
+-----------
+  PUBLIC DOMAIN NOTICE
+ 
+  This software is "United States Government Work" under the terms of the United
+  States Copyright Act. It was written as part of the authors' official duties
+  for the United States Government and thus cannot be copyrighted. This software
+  is freely available to the public for use without a copyright
+  notice. Restrictions cannot be placed on its present or future use.
+ 
+  Although all reasonable efforts have been taken to ensure the accuracy and
+  reliability of the software and associated data, the National Human Genome
+  Research Institute (NHGRI), National Institutes of Health (NIH) and the
+  U.S. Government do not and cannot warrant the performance or results that may
+  be obtained by using this software or data. NHGRI, NIH and the U.S. Government
+  disclaim all warranties as to performance, merchantability or fitness for any
+  particular purpose.
+ 
+  Please cite the authors in any work or product based on this material.
+-------
 
 '''
 
@@ -320,7 +328,7 @@ def get_arguments(args):
     dreamer_reqs = dreamer.add_argument_group('required arguments')
     dreamer_reqs.add_argument(
         '-i', '--input',
-        help='Path to raw DREAMing table',
+        help='Path to raw DREAMing table (FULL path)',
         metavar='<path>',
         type=str,
         required=True)
@@ -398,7 +406,7 @@ def get_arguments(args):
     reader_reqs = reader.add_argument_group('required arguments')
     reader_reqs.add_argument(
         '-i', '--input',
-        help='Path to directory containing bam/sam alignment files (one per sample of interest)',
+        help='Path to directory containing bam/sam alignment files (one per sample of interest) (FULL path)',
         metavar='<path>',
         type=str,
         required=True)

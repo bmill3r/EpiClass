@@ -21,10 +21,18 @@ H eterogeneity
 
 Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.
 
+Download:
+=========
+A copy of the package can be obtained by downloading the git repository::
+
+    wget https://github.com/bmill3r/methuselah.git
+
+
 Installation:
 =============
 Required dependencies can be found in environment.yml.
 Importantly, methuselah is meant for python 3.
+
 samtools 1.6 was used in its development. It is required for running `methuselah READtoMD` on .bam sequence alignment files.
 
 
@@ -48,6 +56,11 @@ Then install::
 Check that methuselah is installed with::
 
     methuselah -V
+
+or::
+
+    methuselah -h
+
 
 
 Quick Usage:
@@ -100,6 +113,12 @@ use::
     methuselah DREAMtoMD -h
 
     methuselah MDBC -h
+
+
+Troubleshooting:
+^^^^^^^^^^^^^^^^
+Overall:
+1. Using full, absolute paths is probably a good idea...
 
 Even more detailed information:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
