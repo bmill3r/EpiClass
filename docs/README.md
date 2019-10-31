@@ -1,5 +1,10 @@
 # Methuselah
 
+information located at:
+docs/source/index.rst.
+
+readthedocs page coming soon...
+
 
 ## Tests
 	### Install
