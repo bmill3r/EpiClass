@@ -40,7 +40,7 @@ We first recommend installing in a fresh python virtual environment, either medi
 
 For conda::
 
-    conda env create -f environment.yml
+    conda env create -f methuselah_env.yml
 
     conda activate methuselah
 
@@ -51,6 +51,10 @@ Then install::
     python setup.py build
 
     python setup.py install
+
+Alternatively::
+
+    pip install methuselah-2.0.0b0.tar.gz
 
 
 Check that methuselah is installed with::
@@ -88,7 +92,7 @@ ii. Command to process the DREAMing melt data::
 
 tempsToMDs.csv should be a two column file indicating the methylation density a melting temperature corresponds to for the given locus for which DREAMing was performed. numberCpGs indicates the number of internal CpGs within the given locus for which DREAMing was performed. Both of these are required.
 
-Methylation Density Binary Classifier performance
+Methylation Density Binary Classifier (MDBC) performance
 -------------------------------------------------
 Compute the optimal methylation density cutoff for the case and control samples, given the sequence methylation density profiles for the genomic region of interest (or pooled genomic regions::
 
