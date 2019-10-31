@@ -244,7 +244,7 @@ class mdbc():
             for m in sorted_MDs:
                 # get counts of reads with given MD
                 selection = df[df['MD'] == m][sample].values
-                counts.append(sum(selection))
+                counts.append(np.nansum(selection))
             # append list of read counts for each MD for given sample to dataframe
             counts_per_MD[sample] = counts
 
