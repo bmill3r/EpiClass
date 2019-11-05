@@ -68,7 +68,7 @@ import pandas as pd
 import tables
 from sklearn.metrics import roc_curve, auc
 
-from .logging import path_leaf 
+from .logger import path_leaf 
 
 class mdbc():
 
@@ -244,7 +244,7 @@ class mdbc():
             for m in sorted_MDs:
                 # get counts of reads with given MD
                 selection = df[df['MD'] == m][sample].values
-                counts.append(sum(selection))
+                counts.append(np.nansum(selection))
             # append list of read counts for each MD for given sample to dataframe
             counts_per_MD[sample] = counts
 
@@ -324,20 +324,26 @@ class mdbc():
 
         caseCounts = []
         caseEFs = []
+        case_names = []
         for case in self.cases_filt:
+            case_names.append(case)
             caseCounts.append(countCasesTable.loc[mdVals, case].sum())
             caseEFs.append(efCasesTable.loc[mdVals, case].sum())
 
         ctrlCounts = []
         ctrlEFs = []
+        ctrl_names = []
         for ctrl in self.controls_filt:
+            ctrl_names.append(ctrl)
             ctrlCounts.append(countControlsTable.loc[mdVals, ctrl].sum())
             ctrlEFs.append(efControlsTable.loc[mdVals, ctrl].sum())
 
         countVals = pd.DataFrame(
-            {'cases': pd.Series(caseCounts), 'controls': pd.Series(ctrlCounts)})
+            {'cases': pd.Series(caseCounts), 'controls': pd.Series(ctrlCounts),
+            'case_samples': pd.Series(case_names), 'control_samples': pd.Series(ctrl_names)})
         EFVals = pd.DataFrame(
-            {'cases': pd.Series(caseEFs), 'controls': pd.Series(ctrlEFs)})
+            {'cases': pd.Series(caseEFs), 'controls': pd.Series(ctrlEFs),
+            'case_samples': pd.Series(case_names), 'control_samples': pd.Series(ctrl_names)})
 
         return countVals, EFVals
     

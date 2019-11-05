@@ -74,7 +74,7 @@ from matplotlib import pyplot as plt
 
 # IMPORT MODULES
 from .arguments import get_arguments
-from .logging import Logger, path_leaf, Logging
+from .logger import Logger, path_leaf, Logging
 from .reading import dreamingToDensityTable, readsToDensityTable
 from .analyzing import mdbc
 from .plotting import boxplot, boxplot2sets, stackedBarplot, histogram, heatmap, rocplot
@@ -150,14 +150,19 @@ def main(args=None):
         readSlice = args_dict['slice']
         outdir = args_dict['output']
 
+        if args_dict['fileTag'] is not None:
+            tag = args_dict['fileTag']
+        else:
+            tag = timestamp
+
         if outdir is not None:
             if outdir.endswith('/'):
                 pass
             else:
                 outdir = outdir + '/'
-            filename = outdir + 'READtoMD.DT.' + timestamp + '.csv'
+            filename = outdir + 'READtoMD.DT.' + tag + '.csv'
         else:
-            filename = cwd + '/READtoMD.DT.' + timestamp + '.csv'
+            filename = cwd + '/READtoMD.DT.' + tag + '.csv'
 
         print('READtoMD:')
         print('Converting files in {} to methylation density table {}.'.format(fileDirectory, path_leaf(filename)))
@@ -183,7 +188,8 @@ def main(args=None):
         outdir = args_dict['output']
         hdf_label = args_dict['hdf_label']
 
-        dfName = path_leaf(df).split('.csv')[0]
+        # READtoMD.DT.ZNF_250bp.csv --> ZNF_250bp
+        dfName = path_leaf(df).split('READtoMD.DT.')[1].split('.csv')[0]
 
         if outdir is not None:
             if outdir.endswith('/'):
@@ -198,6 +204,11 @@ def main(args=None):
             pass
         else:
             hdf_label = cwd + '/MDBC_H5DF.' + dfName + '.h5'
+
+        if args_dict['fileTag'] is not None:
+            fileTag = args_dict['fileTag']
+            filename = filename + '.' + fileTag
+
 
         classifier = mdbc(df=df, cases=cases, controls=controls,
                          fractions=fractions, mdcutoffs=mdcutoffs,
@@ -247,12 +258,12 @@ def main(args=None):
             plt.close()
             print('')
 
-        if args_dict['totalreadcounts'] is True:
+        if args_dict['totalReadCounts'] is True:
             print(' Returning total methylated read counts csv: ' + path_leaf(filename) + '.METH-TOTREADS.csv')
             methCounts = classifier.sampleMethReadCountsAdj
             methCounts.to_csv(filename + '.METH-TOTREADS.csv')
 
-        if args_dict['totalreadcountsPlot'] is True:
+        if args_dict['totalReadCountPlot'] is True:
             print(' Returning total methylated read counts boxplot: ' + path_leaf(filename) + '.METH-TOTREADS.png')
             methReadCountsPlot = boxplot2sets(
                 df=classifier.sampleMethReadCountsAdj, colors=['red', 'blue'],
@@ -306,6 +317,19 @@ def main(args=None):
             casesEFs, controlEFs = classifier.readEFsPerMDtables
             casesEFs.to_csv(filename + '.CASES-EFS.csv')
             controlEFs.to_csv(filename + '.CONTROLS-EFS.csv')
+
+        if args_dict['sampleValsAtMD'] is not None:
+            mds = args_dict['sampleValsAtMD']
+            for md in mds:
+                print(' Returning sample values for MD cutoff = ' + str(md) + ': ' + path_leaf(filename) + '.' + str(md) + '_MD-COUNTS/EFS_VALS.csv')
+                countVals, efVals = classifier.sampleValsForMD(float(md))
+                countVals.to_csv(filename + '.' + str(md) + '_MD-COUNTS_VALS.csv')
+                efVals.to_csv(filename + '.' + str(md) + '_MD-EFS_VALS.csv')
+
+        if args_dict['sampleAveMethTable'] is True:
+            print(' Returning sample avergae methylation values: ' + path_leaf(filename) + '.AVE-METH_VALS.csv')
+            aveMethTable = classifier.sampleAveMeth
+            aveMethTable.to_csv(filename + '.AVE-METH_VALS.csv')
 
         if args_dict['casesEfPlot'] is True:
             print(' Returning cases read fractions for each MD barplot: ' + path_leaf(filename) + '.CASES-READ-FRACs.png')

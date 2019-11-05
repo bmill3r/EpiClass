@@ -453,6 +453,12 @@ def get_arguments(args):
         default=False,
         required=False)
     reader_opts.add_argument(
+        '--fileTag',
+        help='''Optional label to tag output files with. Otherwise a timestamp is given.''',
+        metavar='label',
+        type=str,
+        required=False)
+    reader_opts.add_argument(
         '-o', '--output',
         help='Path to output directory',
         metavar='<path>',
@@ -535,13 +541,13 @@ def get_arguments(args):
         default=False,
         required=False)
     mdbcer_opts.add_argument(
-        '--totalreadcounts',
+        '--totalReadCounts',
         help='Return table of normalized total methylated read counts for cases and controls.',
         action='store_true',
         default=False,
         required=False)
     mdbcer_opts.add_argument(
-        '--totalreadcountsPlot',
+        '--totalReadCountPlot',
         help='Return boxplot of normalized total methylated read counts for cases and controls.',
         action='store_true',
         default=False,
@@ -567,6 +573,19 @@ def get_arguments(args):
     mdbcer_opts.add_argument(
         '--EfEachMD',
         help='Return table of normalized read fractions for each MD cutoff for cases and controls.',
+        action='store_true',
+        default=False,
+        required=False)
+    mdbcer_opts.add_argument(
+        '--sampleValsAtMD',
+        help='Return tables of normalized read fractions and efs for each MD cutoff value indicated in list for cases and controls.',
+        metavar='0.0 0.05',
+        type=float,
+        nargs='+',
+        required=False)
+    mdbcer_opts.add_argument(
+        '--sampleAveMethTable',
+        help='Return table of average methylation values for cases and controls.',
         action='store_true',
         default=False,
         required=False)
@@ -629,6 +648,12 @@ def get_arguments(args):
         help='Return values of normalized sample read fractions for reads with methylation densities at or above the optimal MD cutoff.',
         action='store_true',
         default=False,
+        required=False)
+    mdbcer_opts.add_argument(
+        '--fileTag',
+        help='''Optional label to tag output files with.''',
+        metavar='label',
+        type=str,
         required=False)
     mdbcer_opts.add_argument(
         '-o', '--output',
