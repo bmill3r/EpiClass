@@ -224,7 +224,7 @@ def main(args=None):
             countPerformance.to_csv(filename + '.READ-COUNT-SUMMARY.csv')
             countOptMD = classifier.optimalMDcutoff(countPerformance)
             print(' Optimal MD cutoff (read counts) = {}'.format(countOptMD))
-            countOptMDVals = classifier.sampleValsForMD(countOptMD)[0]
+            countOptMDVals = classifier.sampleValsForMD(countOptMD)[0][['cases' ,'controls']]
             countBox = boxplot2sets(df=countOptMDVals, colors=['red', 'blue'],
                 ytitle='normalized read count', title='MDC = {}'.format(countOptMD))
             print(' p-val (cases vs controls) = {}'.format(countBox.ranksum))
@@ -244,7 +244,7 @@ def main(args=None):
             efPerformance.to_csv(filename + '.EF-SUMMARY.csv')
             efOptMD = classifier.optimalMDcutoff(efPerformance)
             print(' Optimal MD cutoff (read fractions) = {}'.format(efOptMD))
-            efOptMDVals = classifier.sampleValsForMD(efOptMD)[1]
+            efOptMDVals = classifier.sampleValsForMD(efOptMD)[1][['cases' ,'controls']]
             efBox = boxplot2sets(df=efOptMDVals, colors=['red', 'blue'],
                 ytitle='normalized sample read fraction', title='MDC = {}'.format(efOptMD))
             print(' p-val (cases vs controls) = {}'.format(efBox.ranksum))
@@ -427,14 +427,14 @@ def main(args=None):
             print(' Returning sample read counts above optimal MD: ' + path_leaf(filename) + '.READ-COUNTS-OPTMD.csv')
             countPerformance = classifier.cutoffPerformance(read_metric='count')
             countOptMD = classifier.optimalMDcutoff(countPerformance)
-            countOptMDVals = classifier.sampleValsForMD(countOptMD)[0]
+            countOptMDVals = classifier.sampleValsForMD(countOptMD)[0][['cases' ,'controls']]
             countOptMDVals.to_csv(filename + '.READ-COUNTS-OPTMD.csv')
 
         if args_dict['optimalMDEf'] is True:
             print(' Returning sample read fractions above optimal MD: ' + path_leaf(filename) + '.EFS-OPTMD.csv')
             efPerformance = classifier.cutoffPerformance(read_metric='fraction')
             efOptMD = classifier.optimalMDcutoff(efPerformance)
-            efOptMDVals = classifier.sampleValsForMD(efOptMD)[1]
+            efOptMDVals = classifier.sampleValsForMD(efOptMD)[1][['cases' ,'controls']]
             efOptMDVals.to_csv(filename + '.EFS-OPTMD.csv')
 
         print (' ')
