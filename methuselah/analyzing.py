@@ -375,8 +375,8 @@ class mdbc():
         to classiy it as positive, given an MD cutoff.
         '''
 
-        max_ef = pd.concat(self.readCountsPerMDtables,
-                           axis=1).max().max() * 1.10
+        # use non-MD 0% values
+        max_ef = pd.concat(self.readCountsPerMDtables, axis=1).loc[self.mdvalues[1:]].max().max() * 1.10
 
         return np.array(list(np.linspace(0.000, max_ef, 100, endpoint=False)) + [max_ef])
 
@@ -387,7 +387,8 @@ class mdbc():
         to classiy it as positive, given a MD cutoff.
         '''
 
-        max_ef = pd.concat(self.readEFsPerMDtables, axis=1).max().max() * 1.10
+        # use non-MD 0% values
+        max_ef = pd.concat(self.readEFsPerMDtables, axis=1).loc[self.mdvalues[1:]].max().max() * 1.10
         # EFs will be fractions, limit to 1.0
         if max_ef > 1.0:
             return np.array(list(np.linspace(0.000, 1.0, 100, endpoint=False)) + [1.0])

@@ -1,3 +1,5 @@
+#!/usr/bin/env  python
+
 '''
 M
 E
@@ -36,7 +38,7 @@ H eterogeneity
 ################\\\<+<|\\\\\\\>+,++\#\\\\\\\|<<>++,,,,,,+=>|\\\########
 ##########\\<=+=|\<+<>\###\\\\\\\\\\\\\\\\\\\\|<>>>>>==+++++,++=<\#####
 
-Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.
+Optimizing and predicting performance of DNA methylation biomarkers using methylation density information.
 
 2019  Brendan F. Miller
 bmille79 <at> jh <dot> edu
@@ -63,55 +65,76 @@ bmille79 <at> jh <dot> edu
 
 '''
 
-from setuptools import setup
+# /Users/millerbf2/Desktop/Elnitski/Projects/Methylation_Density_Genomewide/methuselah
+# ./forTesting.py MDBC -i ../MDBC_Analysis/OV_plasma/DREAMtoMD.DT.20190211-DREAMing_well_melt_temps_raw.input2bg.csv -a JKLR FLAB JGLR JFGH GKHG JHPP WHPA HKLP FQTR JUTM TFLK JQRT WQHT QWID QWER POIU ASDF GFUR ZXCV HJKL REWQ SDFG XCVB JGIS WWZX KRUK -b 101086 102801 100626 101425 145355 100296 103197 100250 102598 101599 100292 106732 106853 109195 109286 109336 110164 113493 114250 121203 121274 123154 123874 124110 127216 128141 129125 129499 130752 131004 139606 103971 101997 102073 106401 106136 109837 121624 102060 103782 114482 109604 101968 102919 100654
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
 
-setup(
-    name="methuselah",
-    version="2.1.0",
-    author="Brendan F. Miller",
-    author_email="bmille79@jh.edu",
-    description="Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    url="https://github.com/bmill3r/methuselah",
-    packages=['methuselah'],
-    package_dir={'methuselah': 'methuselah'},
-    include_package_data=True,
-    license='Public Domain',
-    zip_safe=False,
+# IMPORT DEPENDENCIES
+import sys
+import os
+import datetime
+import pandas as pd
+from matplotlib import pyplot as plt
+# IMPORT MODULES
+from methuselah.arguments import get_arguments
+from methuselah.logger import Logger, path_leaf, Logging
+from methuselah.reading import dreamingToDensityTable, readsToDensityTable
+from methuselah.analyzing import mdbc
+from methuselah.plotting import boxplot, boxplot2sets, stackedBarplot, histogram, heatmap, rocplot
 
-    install_requires=[
-           'numpy==1.16.*',
-           'pandas==0.25.*',
-           'scikit-learn==0.21.*',
-           'scipy==1.3.*',
-           'matplotlib==3.1.*',
-           'tables==3.5.*'],
+now = datetime.datetime.now()
+timestamp = now.strftime("%Y-%m-%d_%H-%M")
+date = str(datetime.date.today())
+cwd = os.getcwd()
+args, args_dict = get_arguments(args=None)
 
-    entry_points={
-        'console_scripts': [
-            'methuselah = methuselah.__main__:main'
-        ]
-    },
+if args_dict['cmd'] == 'MDBC':
+    df = args_dict['input']
+    cases = args_dict['cases']
+    controls = args_dict['controls']
+    fractions = args_dict['fractions']
+    mdcutoffs = args_dict['MDcutoffs']
+    outdir = args_dict['output']
+    hdf_label = args_dict['hdf_label']
 
-    test_suite='nose.collector',
-    tests_require=[
-        'nose',
-        'pytest',
-        'pytest-cov',
-        'coverage'],
+    dfName = path_leaf(df).split('.DT.')[1].split('.csv')[0]
 
-    classifiers=[
-        'Programming Language :: Python :: 3 :: Only',
-        "Operating System :: OS Independent",
-        'Development Status :: 4 - Beta',
-        'License :: Public Domain',
-        'Intended Audience :: Science/Research',
-        'Topic :: Scientific/Engineering :: Bio-Informatics'
-        'Topic :: Scientific/Engineering :: Medical Science Apps.',
-        'Environment :: Console'
-    ]
-)
+    if outdir is not None:
+        if outdir.endswith('/'):
+            pass
+        else:
+            outdir = outdir + '/'
+        filename = outdir + 'MDBC.' + dfName
+    else:
+        filename = cwd + '/MDBC.' + dfName
+
+    if hdf_label is not None:
+        pass
+    else:
+        hdf_label = cwd + '/MDBC_H5DF.' + dfName + '.h5'
+
+    if args_dict['fileTag'] is not None:
+        fileTag = args_dict['fileTag']
+        filename = filename + '.' + fileTag
+
+
+    classifier = mdbc(df=df, cases=cases, controls=controls,
+                     fractions=fractions, mdcutoffs=mdcutoffs,
+                     hdf_label=hdf_label)
+
+
+#print(classifier.readEFCutoffRange)
+
+#print(pd.concat([classifier.CpGcolumns, classifier.normalizedDensTable], axis=1))
+
+#print(classifier.readEFsPerMDtables)
+
+#print(pd.concat(classifier.readEFsPerMDtables, axis=1).loc[classifier.mdvalues[1:]])
+
+
+
+
+
+
+
+

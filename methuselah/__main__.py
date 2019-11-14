@@ -189,7 +189,7 @@ def main(args=None):
         hdf_label = args_dict['hdf_label']
 
         # READtoMD.DT.ZNF_250bp.csv --> ZNF_250bp
-        dfName = path_leaf(df).split('READtoMD.DT.')[1].split('.csv')[0]
+        dfName = path_leaf(df).split('.DT.')[1].split('.csv')[0]
 
         if outdir is not None:
             if outdir.endswith('/'):
@@ -225,6 +225,7 @@ def main(args=None):
             countOptMD = classifier.optimalMDcutoff(countPerformance)
             print(' Optimal MD cutoff (read counts) = {}'.format(countOptMD))
             countOptMDVals = classifier.sampleValsForMD(countOptMD)[0][['cases' ,'controls']]
+            #countOptMDVals.to_csv(filename + '.OPT-MD-READ-COUNT_VALS.csv')
             countBox = boxplot2sets(df=countOptMDVals, colors=['red', 'blue'],
                 ytitle='normalized read count', title='MDC = {}'.format(countOptMD))
             print(' p-val (cases vs controls) = {}'.format(countBox.ranksum))
@@ -245,6 +246,7 @@ def main(args=None):
             efOptMD = classifier.optimalMDcutoff(efPerformance)
             print(' Optimal MD cutoff (read fractions) = {}'.format(efOptMD))
             efOptMDVals = classifier.sampleValsForMD(efOptMD)[1][['cases' ,'controls']]
+            #efOptMDVals.to_csv(filename + '.OPT-MD-EF_VALS.csv')
             efBox = boxplot2sets(df=efOptMDVals, colors=['red', 'blue'],
                 ytitle='normalized sample read fraction', title='MDC = {}'.format(efOptMD))
             print(' p-val (cases vs controls) = {}'.format(efBox.ranksum))
@@ -313,7 +315,7 @@ def main(args=None):
             plt.close()
 
         if args_dict['EfEachMD'] is True:
-            print(' Returning read fractions for each MD csv, cases and controls: ' + path_leaf(filename) + '.*-EFS.png')
+            print(' Returning read fractions for each MD csv, cases and controls: ' + path_leaf(filename) + '.*-EFS.csv')
             casesEFs, controlEFs = classifier.readEFsPerMDtables
             casesEFs.to_csv(filename + '.CASES-EFS.csv')
             controlEFs.to_csv(filename + '.CONTROLS-EFS.csv')
@@ -325,6 +327,32 @@ def main(args=None):
                 countVals, efVals = classifier.sampleValsForMD(float(md))
                 countVals.to_csv(filename + '.' + str(md) + '_MD-COUNTS_VALS.csv')
                 efVals.to_csv(filename + '.' + str(md) + '_MD-EFS_VALS.csv')
+                readCountDf = countVals[['cases' ,'controls']]
+                efDf = efVals[['cases' ,'controls']]
+                
+                Box = boxplot2sets(df=readCountDf, colors=['red', 'blue'],
+                ytitle='normalized read count', title='MDC = {}'.format(str(md)))
+                print(' normalized read count = p-val (cases vs controls) = {}'.format(Box.ranksum))
+                ROC = rocplot(readCountDf)
+                print(' normalized read count AUC = {}'.format(ROC.AUC))
+                Box.plot(stats=True).savefig(
+                    filename + '.READ-COUNT-' + str(md) + '-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                plt.close()
+                ROC.plot().savefig(
+                    filename + '.READ-COUNT-' + str(md) + '-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                plt.close()
+
+                Box = boxplot2sets(df=efDf, colors=['red', 'blue'],
+                ytitle='normalized read fraction', title='MDC = {}'.format(str(md)))
+                print(' normalized read fraction = p-val (cases vs controls) = {}'.format(Box.ranksum))
+                ROC = rocplot(efDf)
+                print(' normalized read fraction AUC = {}'.format(ROC.AUC))
+                Box.plot(stats=True).savefig(
+                    filename + '.EF-' + str(md) + '-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                plt.close()
+                ROC.plot().savefig(
+                    filename + '.EF-' + str(md) + '-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                plt.close()
 
         if args_dict['sampleAveMethTable'] is True:
             print(' Returning sample avergae methylation values: ' + path_leaf(filename) + '.AVE-METH_VALS.csv')
@@ -417,10 +445,10 @@ def main(args=None):
                 filename + '.EF-TPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
             plt.close()
             efFPRheatmap.plot().savefig(
-                filename + '.EF-TPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-FPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
             plt.close()
             efDIFFheatmap.plot().savefig(
-                filename + '.EF-TPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-DIFF.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
             plt.close()
 
         if args_dict['optimalMDreadcounts'] is True:
