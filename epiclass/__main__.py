@@ -1,14 +1,5 @@
 '''
-M
-E
-T
-H
-U ser
-S earch for
-E pigenetic
-L ocus
-A ssessment of
-H eterogeneity
+EpiClass
 
 #########################\\>==+,,++=|\\################################
 #######################\,......___,__.-.+\\############################
@@ -92,7 +83,7 @@ def main(args=None):
     args, args_dict = get_arguments(args)
 
     if args_dict['cmd'] is None:
-        print('usage: methuselah [-h] [-V] [-v] {DREAMtoMD,READtoMD,MDBC} ...')
+        print('usage: epiclass [-h] [-V] [-v] {DREAMtoMD,READtoMD,MDBC} ...')
         sys.exit(1)
 
     print('#--------------------------------------------------------------------------')

@@ -1,14 +1,5 @@
 '''
-M
-E
-T
-H
-U ser
-S earch for
-E pigenetic
-L ocus
-A ssessment of
-H eterogeneity
+EpiClass
 
 #########################\\>==+,,++=|\\################################
 #######################\,......___,__.-.+\\############################
@@ -36,7 +27,7 @@ H eterogeneity
 ################\\\<+<|\\\\\\\>+,++\#\\\\\\\|<<>++,,,,,,+=>|\\\########
 ##########\\<=+=|\<+<>\###\\\\\\\\\\\\\\\\\\\\|<>>>>>==+++++,++=<\#####
 
-Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.
+Optimizing and predicting performance of DNA methylation biomarkers using methylation density information.
 
 2019  Brendan F. Miller
 bmille79 <at> jh <dot> edu
@@ -63,37 +54,4 @@ bmille79 <at> jh <dot> edu
 
 '''
 
-import sys
-import os
-import datetime
-import logging
-
-date = str(datetime.date.today())
-
-# print(std.out 'print' statements to new file and to console:)
-class Logger(object):
-    def __init__(self):
-        self.terminal = sys.stdout
-        self.log = open('methuselah.' + date + '.log', "a+")
-
-    def write(self, message):
-        self.terminal.write(message)
-        self.log.write(message)  
-
-    def flush(self):
-        #this flush method is needed for python 3 compatibility.
-        #this handles the flush command by doing nothing.
-        pass
-
-class Logging(object):
-    def __init__(self, args):
-        
-        levels = [logging.WARNING, logging.INFO, logging.DEBUG]
-        level = levels[min(len(levels) - 1, args.verbose)]  # capped to number of levels
-        logging.basicConfig(level=level,
-                            format="%(levelname)s %(message)s")
-
-# get file name from path no matter the operating system or file path
-def path_leaf(path):
-    head, tail = os.path.split(path)
-    return tail or os.path.basename(head)
+__version__ = '2.2.0'

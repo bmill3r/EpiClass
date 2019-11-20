@@ -1,4 +1,4 @@
-# Methuselah
+# EpiClass
 
 information located at:
 docs/source/index.rst.

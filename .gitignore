@@ -1,8 +1,11 @@
 .DS_Store
 test_data/
-dist/
-build/
 *.log
 *.pyc
 *.gz
 *.egg-info
+draft_scripts/
+tests/
+test_data/
+methuselah_env.yml
+forTesting.py

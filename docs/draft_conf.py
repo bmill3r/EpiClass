@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'methuselah'
+project = 'epiclass'
 copyright = '2019, Brendan F. Miller'
 author = 'Brendan F. Miller'
 
 # The full version, including alpha/beta/rc tags
-release = '2.0.0-beta'
+release = '2.2.0'
 
 
 # -- General configuration ---------------------------------------------------

@@ -1,14 +1,5 @@
 '''
-M
-E
-T
-H
-U ser
-S earch for
-E pigenetic
-L ocus
-A ssessment of
-H eterogeneity
+EpiClass
 
 #########################\\>==+,,++=|\\################################
 #######################\,......___,__.-.+\\############################
@@ -69,16 +60,16 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="methuselah",
-    version="2.1.0",
+    name="EpiClass",
+    version="2.2.0",
     author="Brendan F. Miller",
     author_email="bmille79@jh.edu",
     description="Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bmill3r/methuselah",
-    packages=['methuselah'],
-    package_dir={'methuselah': 'methuselah'},
+    packages=['epiclass'],
+    package_dir={'epiclass': 'epiclass'},
     include_package_data=True,
     license='Public Domain',
     zip_safe=False,
@@ -93,7 +84,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'methuselah = methuselah.__main__:main'
+            'epiclass = epiclass.__main__:main'
         ]
     },
 

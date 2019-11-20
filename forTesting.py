@@ -1,16 +1,7 @@
 #!/usr/bin/env  python
 
 '''
-M
-E
-T
-H
-U ser
-S earch for
-E pigenetic
-L ocus
-A ssessment of
-H eterogeneity
+EpiClass
 
 #########################\\>==+,,++=|\\################################
 #######################\,......___,__.-.+\\############################
@@ -76,11 +67,11 @@ import datetime
 import pandas as pd
 from matplotlib import pyplot as plt
 # IMPORT MODULES
-from methuselah.arguments import get_arguments
-from methuselah.logger import Logger, path_leaf, Logging
-from methuselah.reading import dreamingToDensityTable, readsToDensityTable
-from methuselah.analyzing import mdbc
-from methuselah.plotting import boxplot, boxplot2sets, stackedBarplot, histogram, heatmap, rocplot
+from EpiClass.arguments import get_arguments
+from EpiClass.logger import Logger, path_leaf, Logging
+from EpiClass.reading import dreamingToDensityTable, readsToDensityTable
+from EpiClass.analyzing import mdbc
+from EpiClass.plotting import boxplot, boxplot2sets, stackedBarplot, histogram, heatmap, rocplot
 
 now = datetime.datetime.now()
 timestamp = now.strftime("%Y-%m-%d_%H-%M")
@@ -121,6 +112,8 @@ if args_dict['cmd'] == 'MDBC':
     classifier = mdbc(df=df, cases=cases, controls=controls,
                      fractions=fractions, mdcutoffs=mdcutoffs,
                      hdf_label=hdf_label)
+
+    print(classifier.inputFracs)
 
 
 #print(classifier.readEFCutoffRange)

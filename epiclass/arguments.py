@@ -1,14 +1,5 @@
 '''
-M
-E
-T
-H
-U ser
-S earch for
-E pigenetic
-L ocus
-A ssessment of
-H eterogeneity
+EpiClass
 
 #########################\\>==+,,++=|\\################################
 #######################\,......___,__.-.+\\############################
@@ -71,16 +62,7 @@ from .__init__ import __version__
 
 description_table = """\
 
-    M
-    E
-    T
-    H
-    U ser
-    S earch for
-    E pigenetic
-    L ocus
-    A ssessment of
-    H eterogeneity
+    EpiClass
 
     #########################\\>==+,,++=|\\################################
     #######################\,......___,__.-.+\\############################
@@ -129,10 +111,10 @@ description_table = """\
     ---------------------------------------------------------
     ---------------------------------------------------------
     
-    The methuselah sub-modules can be accessed by executing:
-        'methuselah module_name arg1 arg2 ...'
+    The epiclass sub-modules can be accessed by executing:
+        'epiclass module_name arg1 arg2 ...'
     Sub-module help  and argsuments can be displayed by executing:
-    'methuselah module_name --help'
+    'epiclass module_name --help'
     
     Sub-module descriptions:
     
@@ -282,11 +264,11 @@ epilog_description = '''\
 
     example usage:
     
-    ./methuselah DREAMtoMD -i ./rawDREAMing.csv --tempsToMDs tempsToMDs.csv --numberCpGs 14 -o ./label_
+    ./epiclass DREAMtoMD -i ./rawDREAMing.csv --tempsToMDs tempsToMDs.csv --numberCpGs 14 -o ./label_
     
     will return ./label_rawDREAMing.MDT.csv methylation density table. Then, input this into:
     
-    ./methuselah MDBC -i -a cases -b controls --fractions ./sampleInputFractions.csv
+    ./epiclass MDBC -i -a cases -b controls --fractions ./sampleInputFractions.csv
     
     which will return:
     ./label_rawDREAMing.MDT.countsummary.csv, ./label_rawDREAMing.MDT.efsummary.csv,
@@ -305,7 +287,7 @@ def get_arguments(args):
 
     """INITIALIZE PARSER"""
     parser = argparse.ArgumentParser(
-        prog='methuselah',
+        prog='epiclass',
         description=dedent(description_table),
         formatter_class=argparse.RawTextHelpFormatter,
         epilog=dedent(epilog_description))

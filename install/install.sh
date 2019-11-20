@@ -1,10 +1,12 @@
 #!/bin/bash
 
-git clone https://github.com/bmill3r/methuselah
+git clone https://github.com/bmill3r/EpiClass
 
-conda env create --file methuselah/environment.yml
-conda activate methuselah
+cd EpiClass
 
-cd methuselah; python setup.py build; python setup.py install
+conda env create --file epiclass_env.yml
+conda activate epiclass
 
-methuselah -V
+python setup.py build; python setup.py install
+
+epiclass -V

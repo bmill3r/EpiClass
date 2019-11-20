@@ -1,14 +1,5 @@
 '''
-M
-E
-T
-H
-U ser
-S earch for
-E pigenetic
-L ocus
-A ssessment of
-H eterogeneity
+EpiClass
 
 #########################\\>==+,,++=|\\################################
 #######################\,......___,__.-.+\\############################
@@ -113,7 +104,9 @@ class mdbc():
         self.sampleTotalReadCounts_filt = self.sampleTotalReadCounts[~self.sampleTotalReadCounts.index.isin(
             self.noValueSamples)]
 
-        if isinstance(fractions, pd.DataFrame):
+        #if isinstance(fractions, pd.DataFrame):
+        if fractions is not None:
+            fractions = pd.read_csv(fractions)
             self.inputFracs = dict(
                 zip([str(i) for i in fractions['samples'].values], fractions['fractions'].values))
             self.sampleFracs = [float(self.inputFracs[i])
@@ -128,7 +121,7 @@ class mdbc():
             self.casesFracs = [1.0 for i in self.cases_filt]
             self.ctrlFracs = [1.0 for i in self.controls_filt]
         
-        self.hdf_label = hdf_label
+        self.hdf_label = hdf_label 
 
     @property
     def sampleMethReadCountsAdj(self):
@@ -377,7 +370,7 @@ class mdbc():
 
         # use non-MD 0% values
         max_ef = pd.concat(self.readCountsPerMDtables, axis=1).loc[self.mdvalues[1:]].max().max() * 1.10
-
+        #max_ef = 100
         return np.array(list(np.linspace(0.000, max_ef, 100, endpoint=False)) + [max_ef])
 
     @property

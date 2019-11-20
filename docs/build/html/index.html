@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EpiClass’s documentation! &mdash; methuselah 2.0.0-beta documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="methuselah 2.0.0-beta documentation" href="#"/>
+        <link rel="next" title="Documentation" href="Documentation.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> methuselah
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Need Help.html">Need Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">methuselah</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>EpiClass’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="epiclass-s-documentation">
+<h1>EpiClass’s documentation!<a class="headerlink" href="#epiclass-s-documentation" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="overview">
+<h1>Overview:<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>EpiClass</p>
+<p>Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.</p>
+</div>
+<div class="section" id="download">
+<h1>Download:<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h1>
+<p>A copy of the package can be obtained by downloading the git repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bmill3r</span><span class="o">/</span><span class="n">EpiClass</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation">
+<h1>Installation:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Required dependencies can be found in epiclass_env.yml.
+Importantly, epiclass is meant for python 3.</p>
+<p>samtools 1.6 was used in its development. It is required for running <cite>epiclass READtoMD</cite> on .bam sequence alignment files.</p>
+<p>We first recommend installing in a fresh python virtual environment, either mediated by conda or vitrualenv, using the epiclass_env.yml.</p>
+<p>For conda:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">epiclass_env</span><span class="o">.</span><span class="n">yml</span>
+
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">epiclass</span>
+</pre></div>
+</div>
+<p>Then install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">epiclass</span>
+
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build</span>
+
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Alternatively:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">epiclass</span><span class="o">-</span><span class="mf">2.2</span><span class="o">.</span><span class="mf">0.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p>Check that epiclass is installed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="o">-</span><span class="n">V</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="quick-usage">
+<h1>Quick Usage:<a class="headerlink" href="#quick-usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generate-methylation-density-table-dreamtomd-readtomd-dt-filename-csv">
+<h2>Generate methylation density table ({DREAMtoMD|READtoMD}.DT.{filename}.csv)<a class="headerlink" href="#generate-methylation-density-table-dreamtomd-readtomd-dt-filename-csv" title="Permalink to this headline">¶</a></h2>
+<p>From either sequencing alignment reads or DREAMing methylation melt data.</p>
+<div class="section" id="for-sequences">
+<h3>For sequences:<a class="headerlink" href="#for-sequences" title="Permalink to this headline">¶</a></h3>
+<ol class="lowerroman">
+<li><p>Each file must be its own .sam or .bam file. Point to the directory that contains the files to analyze.</p></li>
+<li><p>Alignment files must be from Bismark (<a class="reference external" href="https://www.bioinformatics.babraham.ac.uk/projects/bismark/">https://www.bioinformatics.babraham.ac.uk/projects/bismark/</a>).</p></li>
+<li><p>Command to process the sequencing reads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="n">READtoMD</span> <span class="o">-</span><span class="n">i</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">files</span> <span class="o">--</span><span class="n">interval</span> <span class="n">BED</span><span class="o">/</span><span class="k">with</span><span class="o">/</span><span class="n">genome</span><span class="o">/</span><span class="n">coordinates</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The interval file is a bed file that has genomic coordinates for which methylation density information will be extracted for the samples. If multiple intervals passed, the analysis will be done using pooled information from all of them. Otherwise, can pass “chr:start-stop” for a single genomic region.</p>
+</div>
+<div class="section" id="for-dreaming-data">
+<h3>For DREAMing data:<a class="headerlink" href="#for-dreaming-data" title="Permalink to this headline">¶</a></h3>
+<ol class="lowerroman">
+<li><p>Use a raw melt temp .csv file as input. A custom template is provided.</p></li>
+<li><p>Command to process the DREAMing melt data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="n">DREAMtoMD</span> <span class="o">-</span><span class="n">i</span> <span class="n">rawmelt</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">tempsToMDs</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">numberCpGs</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>tempsToMDs.csv should be a two column file indicating the methylation density a melting temperature corresponds to for the given locus for which DREAMing was performed. numberCpGs indicates the number of internal CpGs within the given locus for which DREAMing was performed. Both of these are required.</p>
+</div>
+</div>
+<div class="section" id="methylation-density-binary-classifier-mdbc-performance">
+<h2>Methylation Density Binary Classifier (MDBC) performance<a class="headerlink" href="#methylation-density-binary-classifier-mdbc-performance" title="Permalink to this headline">¶</a></h2>
+<p>Compute the optimal methylation density cutoff for the case and control samples, given the sequence methylation density profiles for the genomic region of interest (or pooled genomic regions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="n">MDBC</span> <span class="o">-</span><span class="n">i</span> <span class="n">densityTable</span><span class="o">.</span><span class="n">csv</span> <span class="o">-</span><span class="n">a</span> <span class="n">cases</span> <span class="o">-</span><span class="n">b</span> <span class="n">controls</span>
+</pre></div>
+</div>
+<p>By default, returns summary tables containing the TPR, 1 - FPR, AUC, and optimal read cutoff for each methylation density cutoff (MDC). Will also return ROCs and boxplots for the optimal MD.</p>
+<p>This is done using either the sample read counts or the sample read fractions. As in, the number of reads with a given methylation density or higher, or the sample fraction of reads with a given methylation density or higher.</p>
+<p>More extensive plots and sample information can be obtained with additional command flags.</p>
+<p>Samples can be normalized based on relative sample fractions, and specific methylation density cutoffs can also be used.</p>
+</div>
+<div class="section" id="for-more-information">
+<h2>For more information:<a class="headerlink" href="#for-more-information" title="Permalink to this headline">¶</a></h2>
+<p>use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="o">-</span><span class="n">h</span>
+
+<span class="n">epiclass</span> <span class="n">READtoMD</span> <span class="o">-</span><span class="n">h</span>
+
+<span class="n">epiclass</span> <span class="n">DREAMtoMD</span> <span class="o">-</span><span class="n">h</span>
+
+<span class="n">epiclass</span> <span class="n">MDBC</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting:<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<p>Overall:
+1. Using full, absolute paths is probably a good idea…</p>
+</div>
+<div class="section" id="even-more-detailed-information">
+<h3>Even more detailed information:<a class="headerlink" href="#even-more-detailed-information" title="Permalink to this headline">¶</a></h3>
+<p>Follow the <cite>Documentation</cite> link under ‘Contents” below:</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="License.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Need Help.html">Need Help</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Documentation.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Brendan F. Miller.
+
+    </p>
+  </div>
+  &copy; 2015 HPED LP | <a href="http://www8.hp.com/us/en/hpe/legal/terms-of-use.html">Terms of Use</a> | <a href="https://www.hpe.com/us/en/legal/privacy.html">Privacy</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.0.0-beta',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
