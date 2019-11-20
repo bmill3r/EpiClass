@@ -37,7 +37,7 @@ For conda::
 
 Then install::
 
-    cd epiclass
+    cd EpiClass
 
     python setup.py build
 
@@ -45,7 +45,7 @@ Then install::
 
 Alternatively::
 
-    pip install epiclass-2.2.0.tar.gz
+    pip install EpiClass-2.2.0.tar.gz
 
 
 Check that epiclass is installed with::
