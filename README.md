@@ -1,17 +1,6 @@
 # EpiClass
 
-information located at:
-docs/source/index.rst.
 
-readthedocs page coming soon...
+readthedocs.com documentation:
+https://epiclass.readthedocs.io/en/latest/index.html
 
-
-## Tests
-	### Install
-	
-	pytest and nose packages
-	
-	
-	### Run
-	
-	$ py.test
