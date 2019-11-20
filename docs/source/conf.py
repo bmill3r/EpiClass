@@ -7,14 +7,14 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'methuselah'
+project = 'EpiClass'
 copyright = '2019, Brendan F. Miller'
 author = 'Brendan F. Miller'
 
 # The short X.Y version
-version = '2.0.0'
+version = '2.2.0'
 # The full version, including alpha/beta/rc tags
-release = '2.0.0-beta'
+release = '2.2.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -86,6 +86,6 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 #---sphinx-themes-----
-html_theme = 'sphinx_ops_theme'
-import sphinx_ops_theme
-html_theme_path = [sphinx_ops_theme.get_html_theme_path()]
+#html_theme = 'sphinx_ops_theme'
+#import sphinx_ops_theme
+#html_theme_path = [sphinx_ops_theme.get_html_theme_path()]

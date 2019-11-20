@@ -119,7 +119,7 @@ plt.legend(bbox_to_anchor=(1.04,1.15), loc="upper left", fontsize=10, edgecolor=
 plt.text(x=4.5, y=1.15, s='Tumors')
 plt.text(x=5.5, y=1.15, s='Controls')
 
-fig.savefig('Figure1_average_methylation_lineplot.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+fig.savefig('Figure1_average_methylation_lineplot.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
 
 
 
