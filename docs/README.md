@@ -1,17 +1,6 @@
-# Methuselah
-
-information located at:
-docs/source/index.rst.
-
-readthedocs page coming soon...
+# EpiClass
 
 
-## Tests
-	### Install
-	
-	pytest and nose packages
-	
-	
-	### Run
-	
-	$ py.test
+readthedocs.com documentation:
+https://epiclass.readthedocs.io/en/latest/index.html
+
