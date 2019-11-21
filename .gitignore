@@ -9,3 +9,4 @@ tests/
 test_data/
 methuselah_env.yml
 forTesting.py
+!/dist/EpiClass*
