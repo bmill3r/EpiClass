@@ -16,7 +16,7 @@ Download:
 =========
 A copy of the package can be obtained by downloading the git repository::
 
-    wget https://github.com/bmill3r/EpiClass.git
+    git clone https://github.com/bmill3r/EpiClass
 
 
 Installation:
@@ -31,13 +31,13 @@ We first recommend installing in a fresh python virtual environment, either medi
 
 For conda::
 
+    cd EpiClass
+
     conda env create -f epiclass_env.yml
 
     conda activate epiclass
 
 Then install::
-
-    cd EpiClass
 
     python setup.py build
 
@@ -45,7 +45,7 @@ Then install::
 
 Alternatively::
 
-    pip install EpiClass-2.2.0.tar.gz
+    pip install EpiClass-*.*.*.tar.gz
 
 
 Check that epiclass is installed with::

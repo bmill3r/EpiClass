@@ -271,9 +271,9 @@ epilog_description = '''\
     ./epiclass MDBC -i -a cases -b controls --fractions ./sampleInputFractions.csv
     
     which will return:
-    ./label_rawDREAMing.MDT.countsummary.csv, ./label_rawDREAMing.MDT.efsummary.csv,
-    ./label_rawDREAMing.MDT.readcount.optMD.BOX.png, ./label_rawDREAMing.MDT.ef.optMD.BOX.png,
-    ./label_rawDREAMing.MDT.readcount.optMD.ROC.png, ./label_rawDREAMing.MDT.ef.optMD.ROC.png
+    ./MDBC.label_rawDREAMing.READ-COUNT-SUMMARY.csv, ./MDBC.label_rawDREAMing.EF-SUMMARY.csv,
+    ./MDBC.label_rawDREAMing.READ-COUNT-OPTMD-BOX.png, ./MDBC.label_rawDREAMing.EF-OPTMD-BOX.png,
+    ./MDBC.label_rawDREAMing.READ-COUNT-OPTMD-ROC.png, ./MDBC.label_rawDREAMing.EF-OPTMD-ROC.png
     
     where *summary.csv files are tables of TPR, 1-FPR, AUC, optimal read value cutoffs for each MD cutoff assesed
     and *BOX.png and *ROC.png are boxplots or ROC curves using the sample read values for the optimal MD cutoff.
