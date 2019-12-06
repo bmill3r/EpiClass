@@ -505,6 +505,12 @@ def get_arguments(args):
         nargs='+',
         required=False)
     mdbcer_opts.add_argument(
+        '--maxCutoff',
+        help='''Optionally set the maximum read count cutoff or EF cutoff range to test.''',
+        metavar='100.0',
+        type=float,
+        required=False)
+    mdbcer_opts.add_argument(
         '--hdf_label',
         help='''Path of HDF5 file which stores samples values (normalized read counts or fractions) for each MD cutoff.''',
         metavar='<path>',

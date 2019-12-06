@@ -1,0 +1,63 @@
+#--------------------------------------------------------------------------
+#--------------------------------------------------------------------------
+Time:2019-11-15_16-54
+#--------------------------------------------------------------------------
+#--------------------------------------------------------------------------
+Command:
+['/Users/millerbf2/miniconda2/envs/methuselah/bin/methuselah', 'MDBC', '-i', 'READtoMD.DT.2019-11-13_12-35-nameEdits-combinedCols.csv', '-a', 'Ovarian_Cancer', '-b', 'BuffyCoat', '--casesReadCountPlot', '--controlsReadCountPlot', '--casesEfPlot', '--controlsEfPlot', '--readcountDistributionPlot', '--EfDistributionPlot', '--readcountheatmaps', '--Efheatmaps', '--optimalMDEf', '--sampleValsAtMD', '0.0', '0.40', '0.80', '0.90', '0.95', '--optimalMDreadcounts', '--sampleAveMethTable']
+Args:
+Namespace(EfDistributionPlot=True, EfEachMD=False, Efheatmaps=True, MDcutoffs=None, cases=['Ovarian_Cancer'], casesEfPlot=True, casesReadCountPlot=True, cmd='MDBC', controls=['BuffyCoat'], controlsEfPlot=True, controlsReadCountPlot=True, fileTag=None, fractions=None, hdf_label=None, ignoreCountsummary=False, ignoreEFsummary=False, input='READtoMD.DT.2019-11-13_12-35-nameEdits-combinedCols.csv', optimalMDEf=True, optimalMDreadcounts=True, output=None, readcountDistributionPlot=True, readcountheatmaps=True, readcountsEachMD=False, sampleAveMethTable=True, sampleValsAtMD=[0.0, 0.4, 0.8, 0.9, 0.95], totalEf=False, totalEfPlot=False, totalReadCountPlot=False, totalReadCounts=False, verbose=0)
+#--------------------------------------------------------------------------
+MDBC Analysis
+
+ Generating performance summary for each MD using normalized read counts...
+ Optimal MD cutoff (read counts) = 0.85
+ p-val (cases vs controls) = 1.4085857512423377e-05
+ AUC = 0.9564393939393939
+
+ Generating performance summary for each MD using normalized read fractions...
+ Optimal MD cutoff (read fractions) = 0.85
+ p-val (cases vs controls) = 1.4085857512423377e-05
+ AUC = 0.9564393939393939
+
+ Returning cases read counts for each MD barplot: MDBC.2019-11-13_12-35-nameEdits-combinedCols.CASES-READS-COUNTS.png
+ Returning controls read counts for each MD barplot: MDBC.2019-11-13_12-35-nameEdits-combinedCols.CONTROLS-READS-COUNTS.png
+ Returning sample values for MD cutoff = 0.0: MDBC.2019-11-13_12-35-nameEdits-combinedCols.0.0_MD-COUNTS/EFS_VALS.csv
+ normalized read count = p-val (cases vs controls) = 0.005522082546600625
+ normalized read count AUC = 0.7916666666666666
+ normalized read fraction = p-val (cases vs controls) = 0.010507573036458898
+ normalized read fraction AUC = 0.7689393939393939
+ Returning sample values for MD cutoff = 0.4: MDBC.2019-11-13_12-35-nameEdits-combinedCols.0.4_MD-COUNTS/EFS_VALS.csv
+ normalized read count = p-val (cases vs controls) = 0.000205739874220939
+ normalized read count AUC = 0.890151515151515
+ normalized read fraction = p-val (cases vs controls) = 0.000292595792681391
+ normalized read fraction AUC = 0.8806818181818181
+ Returning sample values for MD cutoff = 0.8: MDBC.2019-11-13_12-35-nameEdits-combinedCols.0.8_MD-COUNTS/EFS_VALS.csv
+ normalized read count = p-val (cases vs controls) = 2.9106097788856445e-05
+ normalized read count AUC = 0.9393939393939392
+ normalized read fraction = p-val (cases vs controls) = 3.4083495070622944e-05
+ normalized read fraction AUC = 0.9356060606060604
+ Returning sample values for MD cutoff = 0.9: MDBC.2019-11-13_12-35-nameEdits-combinedCols.0.9_MD-COUNTS/EFS_VALS.csv
+ normalized read count = p-val (cases vs controls) = 8.562411816114864e-05
+ normalized read count AUC = 0.912878787878788
+ normalized read fraction = p-val (cases vs controls) = 8.562411816114864e-05
+ normalized read fraction AUC = 0.912878787878788
+ Returning sample values for MD cutoff = 0.95: MDBC.2019-11-13_12-35-nameEdits-combinedCols.0.95_MD-COUNTS/EFS_VALS.csv
+ normalized read count = p-val (cases vs controls) = 8.562411816114864e-05
+ normalized read count AUC = 0.912878787878788
+ normalized read fraction = p-val (cases vs controls) = 8.562411816114864e-05
+ normalized read fraction AUC = 0.912878787878788
+ Returning sample avergae methylation values: MDBC.2019-11-13_12-35-nameEdits-combinedCols.AVE-METH_VALS.csv
+ Returning cases read fractions for each MD barplot: MDBC.2019-11-13_12-35-nameEdits-combinedCols.CASES-READ-FRACs.png
+ Returning controls read fractions for each MD barplot: MDBC.2019-11-13_12-35-nameEdits-combinedCols.CONTROLS-READ-FRACs.png
+ Returning distribution of reads for each MD histogram: MDBC.2019-11-13_12-35-nameEdits-combinedCols.READ-DISTR.png
+ Returning distribution of read fractions for each MD histogram: MDBC.2019-11-13_12-35-nameEdits-combinedCols.EF-DISTR.png
+ Returning TPR/FPR/TPR-FPR heatmaps using read counts: MDBC.2019-11-13_12-35-nameEdits-combinedCols.COUNT-*.png
+ Returning TPR/FPR/TPR-FPR heatmaps using read fractions: MDBC.2019-11-13_12-35-nameEdits-combinedCols.EF-*.png
+ Returning sample read counts above optimal MD: MDBC.2019-11-13_12-35-nameEdits-combinedCols.READ-COUNTS-OPTMD.csv
+ Returning sample read fractions above optimal MD: MDBC.2019-11-13_12-35-nameEdits-combinedCols.EFS-OPTMD.csv
+ 
+Files stored in: /Users/millerbf2/Desktop/Elnitski/Projects/Methylation_Density_Genomewide/MDBC_Analysis/EGAD00001003822_Widschwendter_RRBS
+ 
+MDBC analysis completed.
+ 

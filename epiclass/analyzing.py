@@ -63,10 +63,12 @@ from .logger import path_leaf
 
 class mdbc():
 
-    def __init__(self, df, cases, controls, fractions=None, mdcutoffs=None, hdf_label='mdbc.mdvals.h5'):
+    def __init__(self, df, cases, controls, fractions=None, mdcutoffs=None, maxCutoff=None, hdf_label='mdbc.mdvals.h5'):
 
         self.densityTable = pd.read_csv(df)
         self.mdvalues = sorted(list(set(self.densityTable['MD'].values)))
+
+        self.maxCutoff = maxCutoff
 
         if isinstance(mdcutoffs, np.ndarray):
             self.mdcutoffs = mdcutoffs
@@ -368,9 +370,13 @@ class mdbc():
         to classiy it as positive, given an MD cutoff.
         '''
 
-        # use non-MD 0% values
-        max_ef = pd.concat(self.readCountsPerMDtables, axis=1).loc[self.mdvalues[1:]].max().max() * 1.10
-        #max_ef = 100
+        if self.maxCutoff is None:
+            # use non-MD 0% values
+            max_ef = pd.concat(self.readCountsPerMDtables, axis=1).loc[self.mdvalues[1:]].max().max() * 1.10
+        else:
+            max_ef = self.maxCutoff
+            #max_ef = 100
+        
         return np.array(list(np.linspace(0.000, max_ef, 100, endpoint=False)) + [max_ef])
 
     @property
@@ -380,8 +386,12 @@ class mdbc():
         to classiy it as positive, given a MD cutoff.
         '''
 
-        # use non-MD 0% values
-        max_ef = pd.concat(self.readEFsPerMDtables, axis=1).loc[self.mdvalues[1:]].max().max() * 1.10
+        if self.maxCutoff is None:
+            # use non-MD 0% values
+            max_ef = pd.concat(self.readEFsPerMDtables, axis=1).loc[self.mdvalues[1:]].max().max() * 1.10
+        else:
+            max_ef = self.maxCutoff
+
         # EFs will be fractions, limit to 1.0
         if max_ef > 1.0:
             return np.array(list(np.linspace(0.000, 1.0, 100, endpoint=False)) + [1.0])

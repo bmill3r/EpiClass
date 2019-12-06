@@ -65,7 +65,7 @@ date = str(datetime.date.today())
 class Logger(object):
     def __init__(self):
         self.terminal = sys.stdout
-        self.log = open('methuselah.' + date + '.log', "a+")
+        self.log = open('epiclass.' + date + '.log', "a+")
 
     def write(self, message):
         self.terminal.write(message)

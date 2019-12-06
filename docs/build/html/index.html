@@ -79,10 +79,14 @@ Importantly, epiclass is meant for python 3.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="the-vignette">
+<h1>The Vignette:<a class="headerlink" href="#the-vignette" title="Permalink to this headline">¶</a></h1>
+<p>For a deeper insight into how the code works and generating the manuscript figures, check out the vignette and associated jupyter notebooks.</p>
+</div>
 <div class="section" id="quick-usage">
 <h1>Quick Usage:<a class="headerlink" href="#quick-usage" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="generate-methylation-density-table-dreamtomd-readtomd-dt-filename-csv">
-<h2>Generate methylation density table ({DREAMtoMD|READtoMD}.DT.{filename}.csv)<a class="headerlink" href="#generate-methylation-density-table-dreamtomd-readtomd-dt-filename-csv" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generate-methylation-density-table-dreamtomd-readtomd-dt-timestamp-csv">
+<h2>Generate methylation density table ({DREAMtoMD|READtoMD}.DT.{timestamp}.csv)<a class="headerlink" href="#generate-methylation-density-table-dreamtomd-readtomd-dt-timestamp-csv" title="Permalink to this headline">¶</a></h2>
 <p>From either sequencing alignment reads or DREAMing methylation melt data.</p>
 <div class="section" id="for-sequences">
 <h3>For sequences:<a class="headerlink" href="#for-sequences" title="Permalink to this headline">¶</a></h3>
@@ -102,7 +106,7 @@ Importantly, epiclass is meant for python 3.</p>
 <ol class="lowerroman">
 <li><p>Use a raw melt temp .csv file as input. A custom template is provided.</p></li>
 <li><p>Command to process the DREAMing melt data:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="n">DREAMtoMD</span> <span class="o">-</span><span class="n">i</span> <span class="n">rawmelt</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">tempsToMDs</span><span class="o">.</span><span class="n">csv</span> <span class="o">--</span><span class="n">numberCpGs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epiclass</span> <span class="n">DREAMtoMD</span> <span class="o">-</span><span class="n">i</span> <span class="n">rawmelt</span><span class="o">.</span><span class="n">csv</span> <span class="o">-</span><span class="n">temps</span> <span class="n">tempsToMDs</span><span class="o">.</span><span class="n">csv</span> <span class="o">-</span><span class="n">cpg</span> <span class="n">numberCpGs</span>
 </pre></div>
 </div>
 </li>

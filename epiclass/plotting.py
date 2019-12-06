@@ -593,7 +593,7 @@ class histogram():
         ytick_pos = np.linspace(0.0, max(heights)*1.20, 5)
 
         # set bins on x-axis:
-        plt.xticks(self.xtick_pos, ['0%'] + [str(round(md*100, 1))+'%' for md in self.xtick_pos[1:]],
+        plt.xticks(self.xtick_pos, ['0%'] + [str(int(round(md*100, 0)))+'%' for md in self.xtick_pos[1:]],
                    fontsize=18, rotation=30)
 
         # set range on y-axis:
@@ -663,7 +663,7 @@ class heatmap():
         ax.imshow(self.matrix, cmap=self.cmap, vmin=0,
                   vmax=1)  # option: remove vmin, vmax
 
-        plt.xticks(self.xtickpos, ['0.0'] + ['%.1e' % x for x in self.xticks[self.xtickpos][1:]],
+        plt.xticks(self.xtickpos, ['0.0'] + ['%.1f' % x for x in self.xticks[self.xtickpos][1:]],
                    rotation=45, fontsize=14)
         plt.yticks(self.ytickpos, [str(y) for y in np.array(self.yticks[::-1])[self.ytickpos]],
                    fontsize=16)

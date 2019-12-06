@@ -57,10 +57,14 @@ or::
     epiclass -h
 
 
+The Vignette:
+=============
+For a deeper insight into how the code works and generating the manuscript figures, check out the vignette and associated jupyter notebooks.
+
 
 Quick Usage:
 ============
-Generate methylation density table ({DREAMtoMD|READtoMD}.DT.{filename}.csv) 
+Generate methylation density table ({DREAMtoMD|READtoMD}.DT.{timestamp}.csv) 
 -----------------------------------------------------
 From either sequencing alignment reads or DREAMing methylation melt data.
 
@@ -79,7 +83,7 @@ For DREAMing data:
 i. Use a raw melt temp .csv file as input. A custom template is provided.
 ii. Command to process the DREAMing melt data::
 
-	epiclass DREAMtoMD -i rawmelt.csv --tempsToMDs.csv --numberCpGs
+	epiclass DREAMtoMD -i rawmelt.csv -temps tempsToMDs.csv -cpg numberCpGs
 
 tempsToMDs.csv should be a two column file indicating the methylation density a melting temperature corresponds to for the given locus for which DREAMing was performed. numberCpGs indicates the number of internal CpGs within the given locus for which DREAMing was performed. Both of these are required.
 

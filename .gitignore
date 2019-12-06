@@ -1,5 +1,4 @@
 .DS_Store
-test_data/
 *.log
 *.pyc
 *.gz
@@ -10,3 +9,4 @@ test_data/
 methuselah_env.yml
 forTesting.py
 !/dist/EpiClass*
+manuscript_figures/tests/

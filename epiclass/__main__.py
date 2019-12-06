@@ -78,7 +78,7 @@ def main(args=None):
     date = str(datetime.date.today())
     cwd = os.getcwd()
 
-    #sys.stdout = Logger() # uncomment if you want output to be automatically stored in methuselah log file
+    #sys.stdout = Logger() # uncomment if you want output to be automatically stored in epiclass log file
 
     args, args_dict = get_arguments(args)
 
@@ -106,16 +106,16 @@ def main(args=None):
         poissonAdjustment = args_dict['poisson']
         includedRows = args_dict['includedRows']
         outdir = args_dict['output']
-        inputName = path_leaf(rawDreamingData)
+        inputName = path_leaf(rawDreamingData).split('.csv')[0]
 
         if outdir is not None:
             if outdir.endswith('/'):
                 pass
             else:
                 outdir = outdir + '/'
-            filename = outdir + 'DREAMtoMD.DT.' + inputName + '.' + timestamp + '.csv'
+            filename = outdir + 'DREAMtoMD.DT.' + timestamp + '.csv'
         else:
-            filename = cwd + '/DREAMtoMD.DT.' + inputName + '.' + timestamp + '.csv'
+            filename = cwd + '/DREAMtoMD.DT.' + timestamp + '.csv'
 
         print('DREAMtoMD:')
         print('Converting {} to methylation density table {}.'.format(inputName, path_leaf(filename)))
@@ -178,6 +178,7 @@ def main(args=None):
         mdcutoffs = args_dict['MDcutoffs']
         outdir = args_dict['output']
         hdf_label = args_dict['hdf_label']
+        maxCutoff = args_dict['maxCutoff']
 
         # READtoMD.DT.ZNF_250bp.csv --> ZNF_250bp
         dfName = path_leaf(df).split('.DT.')[1].split('.csv')[0]
@@ -203,7 +204,7 @@ def main(args=None):
 
         classifier = mdbc(df=df, cases=cases, controls=controls,
                          fractions=fractions, mdcutoffs=mdcutoffs,
-                         hdf_label=hdf_label)
+                         hdf_label=hdf_label, maxCutoff=maxCutoff)
 
         # Default outputs:
         print('MDBC Analysis')
@@ -223,10 +224,10 @@ def main(args=None):
             countROC = rocplot(countOptMDVals)
             print(' AUC = {}'.format(countROC.AUC))
             countBox.plot(stats=True).savefig(
-                filename + '.READ-COUNT-OPTMD-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.READ-COUNT-OPTMD-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             countROC.plot().savefig(
-                filename + '.READ-COUNT-OPTMD-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.READ-COUNT-OPTMD-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             print('')
 
@@ -244,10 +245,10 @@ def main(args=None):
             efROC = rocplot(efOptMDVals)
             print(' AUC = {}'.format(efROC.AUC))
             efBox.plot(stats=True).savefig(
-                filename + '.EF-OPTMD-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-OPTMD-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             efROC.plot().savefig(
-                filename + '.EF-OPTMD-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-OPTMD-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             print('')
 
@@ -263,7 +264,7 @@ def main(args=None):
                 ytitle='normalized read count', title='methylated reads')
             print(' p-val (cases vs controls) = {}'.format(methReadCountsPlot.ranksum))
             methReadCountsPlot.plot(stats=True).savefig(
-                filename + '.METH-TOTREADS.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.METH-TOTREADS.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['totalEf'] is True:
@@ -278,7 +279,7 @@ def main(args=None):
                 ytitle='normalized sample read fraction', title='methylated reads')
             print(' p-val (cases vs controls) = {}'.format(methReadEFsPlot.ranksum))
             methReadEFsPlot.plot(stats=True).savefig(
-                filename + '.METH-TOTEFs.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.METH-TOTEFs.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['readcountsEachMD'] is True:
@@ -293,7 +294,7 @@ def main(args=None):
             casesCountsBar = stackedBarplot(casesCounts, ytitle='normalized read counts',
                 xtitle='cases', colorbarlabel='read methylation density')
             casesCountsBar.plot().savefig(
-                filename + '.CASES-READ-COUNTS.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.CASES-READ-COUNTS.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['controlsReadCountPlot'] is True:
@@ -302,7 +303,7 @@ def main(args=None):
             controlCountsBar = stackedBarplot(controlCounts, ytitle='normalized read counts',
                 xtitle='controls', colorbarlabel='read methylation density')
             controlCountsBar.plot().savefig(
-                filename + '.CONTROLS-READ-COUNTS.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.CONTROLS-READ-COUNTS.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['EfEachMD'] is True:
@@ -327,10 +328,10 @@ def main(args=None):
                 ROC = rocplot(readCountDf)
                 print(' normalized read count AUC = {}'.format(ROC.AUC))
                 Box.plot(stats=True).savefig(
-                    filename + '.READ-COUNT-' + str(md) + '-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                    filename + '.READ-COUNT-' + str(md) + '-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
                 plt.close()
                 ROC.plot().savefig(
-                    filename + '.READ-COUNT-' + str(md) + '-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                    filename + '.READ-COUNT-' + str(md) + '-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
                 plt.close()
 
                 Box = boxplot2sets(df=efDf, colors=['red', 'blue'],
@@ -339,10 +340,10 @@ def main(args=None):
                 ROC = rocplot(efDf)
                 print(' normalized read fraction AUC = {}'.format(ROC.AUC))
                 Box.plot(stats=True).savefig(
-                    filename + '.EF-' + str(md) + '-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                    filename + '.EF-' + str(md) + '-BOX.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
                 plt.close()
                 ROC.plot().savefig(
-                    filename + '.EF-' + str(md) + '-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                    filename + '.EF-' + str(md) + '-ROC.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
                 plt.close()
 
         if args_dict['sampleAveMethTable'] is True:
@@ -356,7 +357,7 @@ def main(args=None):
             casesEFBar = stackedBarplot(casesEFs, ytitle='normalized sample read fraction',
                 xtitle='cases', colorbarlabel='read methylation density')
             casesEFBar.plot().savefig(
-                filename + '.CASES-READ-FRACs.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.CASES-READ-FRACs.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['controlsEfPlot'] is True:
@@ -365,7 +366,7 @@ def main(args=None):
             controlEFBar = stackedBarplot(controlEFs, ytitle='normalized sample read fraction',
                 xtitle='controls', colorbarlabel='read methylation density')
             controlEFBar.plot().savefig(
-                filename + '.CONTROLS-READ-FRACs.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.CONTROLS-READ-FRACs.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['readcountDistributionPlot'] is True:
@@ -378,7 +379,7 @@ def main(args=None):
                                    ytitle='fraction of reads', xtitle='methylation density', title='normalized read counts',
                                    legend=True)
             countsHist.plot().savefig(
-                filename + '.READ-DISTR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.READ-DISTR.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['EfDistributionPlot'] is True:
@@ -391,7 +392,7 @@ def main(args=None):
                                 ytitle='fraction of reads', xtitle='methylation density', title='normalized read fractions',
                                 legend=True)
             efsHist.plot().savefig(
-                filename + '.EF-DISTR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-DISTR.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['readcountheatmaps'] is True:
@@ -409,13 +410,13 @@ def main(args=None):
                 xtitle='sample read count cutoff', ytitle='MD cutoff', title='TPR - FPR')
 
             countTPRheatmap.plot().savefig(
-                filename + '.COUNT-TPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.COUNT-TPR.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             countFPRheatmap.plot().savefig(
-                filename + '.COUNT-FPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.COUNT-FPR.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             countDIFFheatmap.plot().savefig(
-                filename + '.COUNT-DIFF.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.COUNT-DIFF.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['Efheatmaps'] is True:
@@ -433,13 +434,13 @@ def main(args=None):
                 xtitle='sample read fraction cutoff', ytitle='MD cutoff', title='TPR - FPR')
 
             efTPRheatmap.plot().savefig(
-                filename + '.EF-TPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-TPR.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             efFPRheatmap.plot().savefig(
-                filename + '.EF-FPR.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-FPR.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
             efDIFFheatmap.plot().savefig(
-                filename + '.EF-DIFF.png', bbox_inches='tight', pad_inches=0.5, dpi=400)
+                filename + '.EF-DIFF.png', bbox_inches='tight', pad_inches=0.5, dpi=600)
             plt.close()
 
         if args_dict['optimalMDreadcounts'] is True:
