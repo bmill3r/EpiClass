@@ -54,4 +54,4 @@ bmille79 <at> jh <dot> edu
 
 '''
 
-__version__ = '2.2.4'
+__version__ = '2.2.5'
