@@ -61,14 +61,14 @@ with open("README.md", "r") as fh:
 
 setup(
     name="EpiClass",
-    version="2.2.3",
+    version="2.2.4",
     author="Brendan F. Miller",
     author_email="bmille79@jh.edu",
     description="Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/bmill3r/EpiClass",
-    download_url="https://github.com/bmill3r/EpiClass/dist/EpiClass-2.2.3.tar.gz",
+    download_url="https://github.com/bmill3r/EpiClass/dist/EpiClass-2.2.4.tar.gz",
     packages=['epiclass'],
     package_dir={'epiclass': 'epiclass'},
     include_package_data=True,
@@ -76,6 +76,7 @@ setup(
     zip_safe=False,
 
     install_requires=[
+           'python==3.7',
            'numpy==1.16.*',
            'pandas==0.25.*',
            'scikit-learn==0.21.*',

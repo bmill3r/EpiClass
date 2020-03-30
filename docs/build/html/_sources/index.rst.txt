@@ -12,22 +12,29 @@ EpiClass
 
 Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.
 
-Download:
-=========
+Quick Install:
+==============
+We recommend to make conda environment with python==3.7 first::
+
+    conda create -n name python==3.7 pip
+
+    pip install EpiClass
+
+
+Installation from GitHub:
+=========================
 A copy of the package can be obtained by downloading the git repository::
 
     git clone https://github.com/bmill3r/EpiClass
 
 
-Installation:
-=============
 Required dependencies can be found in epiclass_env.yml.
-Importantly, epiclass is meant for python 3.
+Importantly, epiclass is meant for python 3.7.
 
 samtools 1.6 was used in its development. It is required for running `epiclass READtoMD` on .bam sequence alignment files.
 
 
-We first recommend installing in a fresh python virtual environment, either mediated by conda or vitrualenv, using the epiclass_env.yml.
+We first recommend installing in a fresh python virtual environment, either mediated by conda or virtualenv, using the epiclass_env.yml.
 
 For conda::
 
@@ -47,6 +54,8 @@ Alternatively::
 
     pip install EpiClass-*.*.*.tar.gz
 
+(found in: /EpiClass/dist/)
+
 
 Check that epiclass is installed with::
 
@@ -59,7 +68,9 @@ or::
 
 The Vignette:
 =============
-For a deeper insight into how the code works and generating the manuscript figures, check out the vignette and associated jupyter notebooks.
+For a deeper insight into how the code works and generating the manuscript figures, check out the vignette and associated jupyter notebooks::
+
+    https://github.com/bmill3r/EpiClass/manuscript_figures/vignette/README_vignette.ipynb
 
 
 Quick Usage:
