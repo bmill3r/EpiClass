@@ -102,7 +102,7 @@ setup(
         'Development Status :: 4 - Beta',
         'License :: Public Domain',
         'Intended Audience :: Science/Research',
-        'Topic :: Scientific/Engineering :: Bio-Informatics'
+        'Topic :: Scientific/Engineering :: Bio-Informatics',
         'Topic :: Scientific/Engineering :: Medical Science Apps.',
         'Environment :: Console'
     ]
