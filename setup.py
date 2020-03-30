@@ -76,7 +76,6 @@ setup(
     zip_safe=False,
 
     install_requires=[
-           'python==3.7',
            'numpy==1.16.*',
            'pandas==0.25.*',
            'scikit-learn==0.21.*',
