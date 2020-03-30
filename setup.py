@@ -81,7 +81,7 @@ setup(
            'scikit-learn==0.21.*',
            'scipy==1.3.*',
            'matplotlib==3.1.*',
-           'tables==3.5.*'],
+           'tables==3.6.*'],
 
     entry_points={
         'console_scripts': [
