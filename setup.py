@@ -61,13 +61,14 @@ with open("README.md", "r") as fh:
 
 setup(
     name="EpiClass",
-    version="2.2.0",
+    version="2.2.1",
     author="Brendan F. Miller",
     author_email="bmille79@jh.edu",
     description="Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/bmill3r/methuselah",
+    url="https://github.com/bmill3r/EpiClass",
+    download_url="https://github.com/bmill3r/EpiClass/dist/EpiClass-2.2.1.tar.gz",
     packages=['epiclass'],
     package_dir={'epiclass': 'epiclass'},
     include_package_data=True,
