@@ -1,8 +1,10 @@
 Documentation
 =============
 
-More coming soon.
+For an extensive example, check out the vignette on the github page:
 
-For now, check out the bioRvix preprint (MDBC v1):
+manuscript_figures/vignette/README_vignette.ipynb
+
+Check out the bioRvix preprint:
 
 DOI: 10.1101/579839
