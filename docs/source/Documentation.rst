@@ -1,9 +1,9 @@
 Documentation
 =============
 
-For an extensive example, check out the vignette on the github page:
+For an extensive example, check out the vignette on the github page::
 
-manuscript_figures/vignette/README_vignette.ipynb
+	https://github.com/bmill3r/EpiClass/blob/master/manuscript_figures/vignette/README_Vignette.ipynb
 
 Check out the bioRvix preprint:
 

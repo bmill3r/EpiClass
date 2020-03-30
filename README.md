@@ -24,4 +24,4 @@ https://doi.org/10.1101/579839
 
 ##### For a deeper look into the code and generating the figures in the manuscript, check out the vignette on GitHub:
 
-```https://github.com/bmill3r/EpiClass/manuscript_figures/vignette/README_vignette.ipynb```
+```https://github.com/bmill3r/EpiClass/blob/master/manuscript_figures/vignette/README_Vignette.ipynb```

@@ -70,7 +70,7 @@ The Vignette:
 =============
 For a deeper insight into how the code works and generating the manuscript figures, check out the vignette and associated jupyter notebooks::
 
-    https://github.com/bmill3r/EpiClass/manuscript_figures/vignette/README_vignette.ipynb
+    https://github.com/bmill3r/EpiClass/blob/master/manuscript_figures/vignette/README_Vignette.ipynb
 
 
 Quick Usage:
