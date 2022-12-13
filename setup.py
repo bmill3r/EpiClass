@@ -61,7 +61,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="EpiClass",
-    version="2.2.5",
+    version="2.2.6",
     author="Brendan F. Miller",
     author_email="bmille79@jh.edu",
     description="Optimizing and predicting performance of DNA methylation biomarkers using sequence methylation density information.",
@@ -76,7 +76,7 @@ setup(
     zip_safe=False,
 
     install_requires=[
-           'numpy==1.16.*',
+           'numpy==1.19.*',
            'pandas==0.25.*',
            'scikit-learn==0.21.*',
            'scipy==1.3.*',
